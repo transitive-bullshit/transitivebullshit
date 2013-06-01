@@ -1,7 +1,9 @@
 /*! intersection2.pde
  * 
+ * Test of combining gravity and intersection sketches.
+ * 
  * @author: Travis Fischer
- * @date:   December 2008 (Java)
+ * @date:   May 2013
  */
 
 static int VARIATION            = /** int [ 0, 2 ]    **/ 0    /** endint     **/;
