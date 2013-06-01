@@ -1,0 +1,77 @@
+/*! processing.abstraction.less
+ * 
+ * Default styles for processing.abstraction.js, including an inline processing 
+ * variable editor.
+ * 
+ * NOTE: the css version of this file is auto-generated, so only edit the original 
+ * less version if you don't want your changes to be overwritten.
+ */
+/* elements.less
+ * 
+ * Uses elements derived from LESS Elements 0.6 by Dmitry Fadeyev 
+ * (http://lesselements.com)
+ * 
+ * NOTE: the css version of this file is auto-generated, so only edit the original 
+ * less version if you don't want your changes to be overwritten.
+ * 
+ * Copyright (c) 2011-2012 Stamped Inc.
+ */
+.abstraction-variable {
+  display: inline-block;
+  background: #fcfc81 !important;
+  padding: 2px 4px 0 !important;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.abstraction-variable:hover,
+.abstraction-variable:active {
+  background: #ffff00 !important;
+  cursor: pointer;
+}
+.abstraction-variable-editor {
+  position: absolute;
+}
+.abstraction-variable-numeric-editor {
+  width: 180px;
+  margin-left: -90px;
+  background: #fff;
+  border: 1px solid #000;
+  padding: 12px;
+  text-align: center;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.abstraction-variable-input {
+  width: 70%;
+  color: #333;
+  padding: 2px 4px;
+  margin: 0 auto;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid #bfbfbf;
+  outline: none;
+}
+.abstraction-variable-input:focus {
+  outline: none;
+  color: #000;
+}
+.abstraction-variable-slider {
+  margin-top: 12px;
+}
+.abstraction-variable-invalid {
+  border-color: #d54042;
+  color: #d54042;
+}

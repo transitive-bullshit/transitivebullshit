@@ -1,0 +1,61 @@
+<!doctype html>
+
+<html lang="en">
+    
+    {% block pre_head %}
+    <head>
+        {% endblock pre_head %}
+        
+        {% block head %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=8" />
+        
+        <title>{% if title %}{{title}}{% else %}Transitive Bullshit{% endif %}</title>
+        
+        <meta name="author"             content="Travis Fischer">
+        <meta name="copyright"          content="Travis Fischer">
+        <meta name="robots"             content="index,follow">
+        
+        <meta name="viewport"           content="width=device-width, initial-scale=0.36">
+        <meta name="application-name"   content="Transitive Bullshit">
+        
+        <link rel="shortcut icon"       href="TODO">
+        <link rel="apple-touch-icon"    href="TODO">
+        
+        <meta property="og:image"       content="TODO">
+        <meta property="og:title"       content="Transitive Bullshit">
+        <meta property="og:site_name"   content="Transitive Bullshit">
+        <meta property="og:type"        content="website">
+        {% endblock head %}
+        
+        {% block styles %}
+            <link rel="stylesheet"          href="{{ STATIC_ASSET_BASE }}css/libs/h5bp.css">
+        {% endblock styles %}
+        
+        {% block post_head %}
+    </head>
+    {% endblock post_head %}
+    
+    {% block pre_body %}
+    <body>
+        {% endblock pre_body %}
+        
+        {% block content %}
+        {% endblock content %}
+        
+        {% block pre_scripts %}
+        <div id="scripts">
+            {% endblock pre_scripts %}
+            
+            {% block scripts %}
+            {% endblock scripts %}
+            
+            {% block post_scripts %}
+        </div>
+        {% endblock post_scripts %}
+        
+        {% block post_body %}
+    </body>
+    {% endblock post_body %}
+</html>
+

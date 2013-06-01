@@ -1,0 +1,89 @@
+/*! styles.less
+ * 
+ * NOTE: the css version of this file is auto-generated, so only edit the original 
+ * less version if you don't want your changes to be overwritten.
+ */
+/* **************************************************************************
+                                    IMPORTS
+   ************************************************************************** */
+/*! common.less
+ * 
+ * NOTE: the css version of this file is auto-generated, so only edit the original 
+ * less version if you don't want your changes to be overwritten.
+ */
+/* **************************************************************************
+                                    IMPORTS
+   ************************************************************************** */
+/* elements.less
+ * 
+ * Uses elements derived from LESS Elements 0.6 by Dmitry Fadeyev 
+ * (http://lesselements.com)
+ * 
+ * NOTE: the css version of this file is auto-generated, so only edit the original 
+ * less version if you don't want your changes to be overwritten.
+ * 
+ * Copyright (c) 2011-2012 Stamped Inc.
+ */
+/* **************************************************************************
+                              STYLING CONSTANTS
+   ************************************************************************** */
+/* **************************************************************************
+                            BASIC HIGH-LEVEL SETUP
+   ************************************************************************** */
+html {
+  overflow-y: scroll;
+}
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+body {
+  font-family: 'helvetica', sans-serif;
+  font-size: 1em;
+  background: #fff;
+  color: #666;
+}
+a,
+a:link {
+  font-style: inherit;
+}
+a,
+a:focus {
+  outline: 0;
+}
+a,
+a:visited {
+  color: #666;
+  /* #3366cc; */
+
+  text-decoration: none;
+}
+a:visited {
+  color: #444;
+}
+a:hover {
+  color: black;
+}
+ol,
+ul {
+  text-decoration: none;
+  list-style: none;
+  text-indent: 0;
+  padding: 0;
+  margin: 0;
+}
+.active-link {
+  color: #438FED !important;
+}
+.replaced {
+  display: block;
+  text-indent: -9999em;
+  overflow: hidden;
+}
+.floatleft {
+  float: left;
+}
+.floatright {
+  float: right;
+}

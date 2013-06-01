@@ -1,0 +1,11 @@
+.DS_Store
+*.swp
+*~
+*.pyc
+*.pyo
+*.o
+*.old
+*.so
+out
+out.xml
+
