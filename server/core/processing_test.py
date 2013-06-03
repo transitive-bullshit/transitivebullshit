@@ -4,7 +4,7 @@ def get_sketches():
     return [
         {
             'name'  : 'not_found', 
-            'hname' : '404 Page Experiment v0', 
+            'hname' : '404 Page RRT Experiment', 
             'desc'  : "404 page utilizing rapidly exploring random trees (<a href='http://en.wikipedia.org/wiki/Rapidly_exploring_random_tree'>RTTs</a>).", 
         }, 
         {
@@ -64,7 +64,7 @@ def get_sketches():
         {
             'name'  : 'intersection2', 
             'hname' : 'intersection2', 
-            'desc'  : "test test test.", 
+            'desc'  : "Combining the gravity sketch's movement with the intersection sketch's visualization.", 
         }, 
     ]
 

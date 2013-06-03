@@ -23,7 +23,7 @@ PImage  _offscreen;
 color[] _back;
 
 void setup() {
-    size(/** int ( 0, 1024 ] **/ 640 /** endint **/, /** int ( 0, 1024 ] **/ 480 /** endint **/);
+    size(/** int ( 0, 1024 ] **/ 320 /** endint **/, /** int ( 0, 1024 ] **/ 240 /** endint **/);
     frameRate(/** int [ 1, 60 ] **/ 12 /** endint **/);
     loop();
     

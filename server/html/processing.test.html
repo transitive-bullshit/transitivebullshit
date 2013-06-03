@@ -17,6 +17,8 @@
 {% block content %}
     {% if PROCESSING_SKETCH %}
         <div class="canvas-column">
+            <a class="return" href="/processing">Return to all sketches</a>
+            
             <canvas id="processing" 
                    data-processing-sources="/assets/pde/{{PROCESSING_SKETCH}}/{{PROCESSING_SKETCH}}.pde"
                    data-processing-abstraction-editor="processing-editor">

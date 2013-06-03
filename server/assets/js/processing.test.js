@@ -1,10 +1,11 @@
 /*! processing.test.js
  * 
- * Copyright (c) 2011-2012 Stamped Inc.
+ * Copyright (c) 2013 Travis Fischer
  */
 
 /*jslint plusplus: true */
 /*global jQuery, $, History, dp, Processing */
+/* vim: set tabstop=4 shiftwidth=4 softtabstop=4 expandtab: */
 
 (function() {
     $(document).ready(function() {
@@ -153,6 +154,8 @@
         var url         = document.URL;
         var title       = document.title;
         var orig_url    = parse_url(url, title);
+        var $canvas     = $("#processing");
+        var $window     = $(window);
         var key;
         
         var abstraction_params = {};
@@ -173,6 +176,13 @@
             }
         }
         
+        var update_layout = function() {
+            $canvas.css({
+                "margin-top"  : "-" + Math.round($canvas.height() / 2) + "px"
+            });
+            //"right" : Math.max(24, ($body.width() - 48 - $canvas.width()) / 8) + "px", 
+        };
+            
         var init_abstraction = function() {
             var processing = Processing.getInstanceById("processing");
             
@@ -181,6 +191,8 @@
                 
                 return;
             }
+            
+            update_layout();
             
             var model = processing.abstraction_model;
             var vars  = processing.abstraction_variables;
@@ -209,6 +221,7 @@
                         }
                     }
                     
+                    update_layout();
                     var params_str = get_custom_params_string(abstraction_params);
                     
                     if (History && History.enabled) {
@@ -248,6 +261,8 @@
         $(document).on("click", ".dp-j .builtin", function(event) {
             open_context_help(event, true);
         });
+        
+        $window.resize(update_layout);
     });
 })();
 

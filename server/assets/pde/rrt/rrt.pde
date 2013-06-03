@@ -8,14 +8,13 @@
  * @see: http://en.wikipedia.org/wiki/Rapidly_exploring_random_tree
  * 
  * @todo:
- *      * experiment with different non-uniform sampling methods for choosing rand vertex
+ *      * experiment with non-uniform sampling methods for choosing random vertex
  *      * rethink visual treatment
  */
 
 static int   NUM_VERTICES = /** int   [ 1, 128 ] **/ 1    /** endint   **/;
 static float CURVATURE    = /** float [ 0, 10  ] **/ 2.0  /** endfloat **/;
 static float INV_DISTANCE = /** float [ 5, 200 ] **/ 40.0 /** endfloat **/;
-static int   SAMPLER      = /** int   [ 0, 2 ]   **/ 0    /** endint   **/;
 
 float _distance;
 RRTree _tree;
@@ -144,13 +143,8 @@ class RRTree {
     }
     
     PVector random_point() { 
-        if (SAMPLER == 0) { // uniform sampler
-            return new PVector(random(0, width - 1), random(0, height - 1));
-        } else if (SAMPLER == 1) { // normal distribution
-            
-            // TODO
-            //return new PVector(random(0, width - 1), random(0, height - 1));
-        }
+        // uniform sampler
+        return new PVector(random(0, width - 1), random(0, height - 1));
     }
 }
 

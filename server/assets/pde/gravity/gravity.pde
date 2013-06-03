@@ -8,7 +8,7 @@
  * to every other body dependent on mass, proximity, etc.
  */
 
-static int NUM_PARTICLES     = /** int [ 12, 300 ]   **/ 150 /** endint **/;
+static int NUM_PARTICLES     = /** int [ 12, 300 ]   **/ 64  /** endint **/;
 
 // scaling factor that affects the mass of the bodies, effectively scaling the 
 // overall gravity strength of the system

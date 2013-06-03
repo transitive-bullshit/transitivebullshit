@@ -7,7 +7,7 @@
  */
 
 static int VARIATION            = /** int [ 0, 2 ]    **/ 0    /** endint     **/;
-static int NUM_CIRCLES          = /** int [ 1, 200 ]  **/ 100  /** endint     **/;
+static int NUM_CIRCLES          = /** int [ 1, 200 ]  **/ 50   /** endint     **/;
 
 static int CIRCLE_RADIUS        = /** int [ 10, 70 ]  **/ 30   /** endint     **/;
 static int MIN_CIRCLE_RADIUS    = /** int [ 0, 70 ]   **/ 10   /** endint     **/;
