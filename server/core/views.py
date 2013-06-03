@@ -32,3 +32,10 @@ def processing(request, *args, **kwargs):
     
     return render_template(request, 'processing.test.html', params)
 
+@view()
+def test(request, *args, **kwargs):
+    return render_template(request, 'test.html', {
+        'page'  : 'test', 
+        'title' : 'TransitiveBullshit - Test', 
+    })
+

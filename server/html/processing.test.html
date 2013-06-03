@@ -6,8 +6,8 @@
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css"/>
     
     <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/libs/SyntaxHighlighter.css"></script>
-    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/libs/jquery.fancybox.css?v=2.0.6">
-    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/libs/jquery.colorpicker.css"></script>
+    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/libs/jquery/jquery.fancybox.css?v=2.0.6">
+    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/libs/jquery/jquery.colorpicker.css"></script>
     
     <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/styles.css">
     <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/processing.abstraction.css"></script>
@@ -53,16 +53,12 @@
 {% block scripts %}
     {{ block.super }}
     
-    <!-- attempt to load jQuery from google's ajax CDN, falling back to our own local version -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="/assets/js/libs/jquery/jquery-1.10.1{% if IS_PROD %}.min{% endif %}.js"><\/script>')</script>
-    
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/jquery.themeswitcher.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/jquery/jquery.themeswitcher.js"></script>
     
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/history/jquery.history.js"></script>
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/jquery.fancybox.js"></script>
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/jquery.colorpicker.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/jquery/jquery.history.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/jquery/jquery.fancybox.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/jquery/jquery.colorpicker.js"></script>
     
     <script src="{{ STATIC_ASSET_BASE }}js/libs/underscore/underscore.js"></script>
     <script src="{{ STATIC_ASSET_BASE }}js/libs/backbone/backbone.js"></script>
@@ -70,9 +66,5 @@
     
     <script src="{{ STATIC_ASSET_BASE }}js/processing.abstraction.js"></script>
     <script src="{{ STATIC_ASSET_BASE }}js/processing.test.js"></script>
-    
-    <script>
-        {{ PRELOAD_JS|safe }}
-    </script>
 {% endblock scripts %}
 

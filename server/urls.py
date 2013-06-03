@@ -12,11 +12,12 @@ urlpatterns = patterns('',
     url(r'^index$',                             'core.views.index'), 
     url(r'^index\.html?$',                      'core.views.index'), 
     url(r'^/?$',                                'core.views.index'), 
-   
     
-    # ----------------------------- PROFILE ------------------------------------
     # e.g., transitivebullshit.com/processing
     url(r'^processing\/?$',                     'core.views.processing'), 
+    
+    # e.g., transitivebullshit.com/test
+    url(r'^test\/?$',                           'core.views.test'), 
 )
 
 def custom_static(prefix, view='django.views.static.serve', **kwargs):

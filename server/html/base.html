@@ -48,9 +48,17 @@
             {% endblock pre_scripts %}
             
             {% block scripts %}
+            
+            <!-- attempt to load jQuery from google's ajax CDN, falling back to our own local version -->
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+            <script>window.jQuery || document.write('<script src="/assets/js/libs/jquery/jquery-1.10.1{% if IS_PROD %}.min{% endif %}.js"><\/script>')</script>
+            
             {% endblock scripts %}
             
             {% block post_scripts %}
+            <script>
+                {{ PRELOAD_JS|safe }}
+            </script>
         </div>
         {% endblock post_scripts %}
         

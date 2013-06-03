@@ -1,17 +1,17 @@
 
+Sections:
+    * BS
+    * Interactive BS
+    * Professional BS
+    * About
+
 Articles:
+    * About
+    * Processing
     * Stamped BE stack
-    * Dev workflow
-    * Practical scalability concerns
+    * Scalability
         * Design patterns for properly isolating components
         * https://github.com/Netflix/Hystrix
         * http://techblog.netflix.com/2011/12/making-netflix-api-more-resilient.html
-
-TODO:
-    * clean skeleton project w/ Makefile, base CSS, modular JS, and deployment
-    * apply skeleton to transitivebullshit.com
-
-CSS dev vs prod:
-    * avoid DEBUG conditional if possible
-    * 
+    * article about folding map
 
