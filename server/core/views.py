@@ -5,10 +5,13 @@ import processing_test
 
 @view()
 def index(request, *args, **kwargs):
-    return render_template(request, 'index.html', {
+    params = {
         'page'  : 'index', 
-        'title' : 'TransitiveBullshit', 
-    })
+        'title' : 'Transitive Bullshit', 
+        'PROCESSING_SKETCHES' : processing_test.get_sketches(), 
+    }
+    
+    return render_template(request, 'index.html', params)
 
 @view(ignore_extra_params=True)
 def processing(request, *args, **kwargs):
@@ -28,7 +31,7 @@ def processing(request, *args, **kwargs):
         params['PROCESSING_SKETCHES'] = sketches
     
     params['page']  = 'processing'
-    params['title'] = 'TransitiveBullshit - Processing Lab'
+    params['title'] = 'Transitive Bullshit - Processing Lab'
     
     return render_template(request, 'processing.test.html', params)
 
@@ -36,6 +39,6 @@ def processing(request, *args, **kwargs):
 def test(request, *args, **kwargs):
     return render_template(request, 'test.html', {
         'page'  : 'test', 
-        'title' : 'TransitiveBullshit - Test', 
+        'title' : 'Transitive Bullshit - Test', 
     })
 

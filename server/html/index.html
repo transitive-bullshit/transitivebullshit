@@ -1,5 +1,16 @@
 {% extends "base.html" %}
         
+{% block styles %}
+    {{ block.super }}
+    
+    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/libs/isotope.css">
+    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/libs/prism.css">
+    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/libs/jquery/jquery.fancybox.css">
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Droid+Sans'>
+    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/blur.css">
+    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/index.css">
+{% endblock styles %}
+
 {% block content %}
     {{ block.super }}
     
@@ -7,6 +18,33 @@
     </header>
     
     <div id="content">
+        <canvas class="blur_8" id="background-canvas" data-processing-sources="/assets/pde/test/test.pde"></canvas>
+        
+        <div class="articles">
+            {% include "static_map_article.html" %}
+            {% include "css_blur_filters.html" %}
+            
+            {% for sketch in PROCESSING_SKETCHES %}
+                <article class="single sketch" id="sketch-{{sketch.name}}" data-tags="processing" data-date="6/8/13">
+                    <div class="title"><a href="/processing?sketch={{sketch.name}}">{{ sketch.hname|safe }}</a></div>
+                    <p class="desc">{{ sketch.desc|safe }}</p>
+                    
+                    {% if sketch.attr %}
+                        <p class="attr">{{ sketch.attr|safe }}</p>
+                    {% endif %}
+                    
+                    <p><a href="/processing?sketch={{sketch.name}}" id="preview-sketch-{{sketch.name}}" class="preview-sketch"></a></p>
+                </article>
+            {% endfor %}
+            
+            {% include "processing.html" %}
+            {% include "stamped_be.html" %}
+            {% include "milton.html" %}
+            {% include "pixar.html" %}
+            {% include "ticalc.html" %}
+            {% include "links.html" %}
+            {% include "about.html" %}
+        </div>
     </div>
     
     <!--<div id="disqus_thread"></div>-->
@@ -16,7 +54,9 @@
     {{ block.super }}
     
     <script src="{{ STATIC_ASSET_BASE }}js/libs/jquery/jquery.isotope.min.js"></script>
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/jquery/jquery.infinitescroll.min.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/jquery/jquery.fancybox.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/prism.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/processing-1.4.1.js"></script>
     <script src="{{ STATIC_ASSET_BASE }}js/index.js"></script>
     
     <script>

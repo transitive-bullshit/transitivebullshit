@@ -8,13 +8,13 @@
  * @see: http://en.wikipedia.org/wiki/Rapidly_exploring_random_tree
  * 
  * @todo:
- *      * experiment with non-uniform sampling methods for choosing random vertex
  *      * rethink visual treatment
  */
 
 static int   NUM_VERTICES = /** int   [ 1, 128 ] **/ 1    /** endint   **/;
 static float CURVATURE    = /** float [ 0, 10  ] **/ 2.0  /** endfloat **/;
 static float INV_DISTANCE = /** float [ 5, 200 ] **/ 40.0 /** endfloat **/;
+static int   SAMPLER      = /** int   [ 0, 1 ]   **/ 0    /** endint   **/;
 
 float _distance;
 RRTree _tree;
@@ -143,8 +143,39 @@ class RRTree {
     }
     
     PVector random_point() { 
-        // uniform sampler
-        return new PVector(random(0, width - 1), random(0, height - 1));
+        if (SAMPLER == 0) {
+            // uniform sampler
+            return new PVector(random(0, width - 1), random(0, height - 1));
+        } else {
+            // gaussian sampler
+            float mean_x   = width  / 2;
+            float stddev_x = width  / /** float [ 2, 10 ] **/ 5 /** endfloat **/;
+            
+            float mean_y   = height / 2;
+            float stddev_y = height / /** float [ 2, 10 ] **/ 5 /** endfloat **/;
+            
+            return new PVector(Gaussian.sample(mean_x, stddev_x), Gaussian.sample(mean_y, stddev_y));
+        }
+    }
+}
+
+static class Gaussian {
+    // returns a sample from a standard normal distribution
+    static float sample() {
+        float u, v, r;
+        
+        // box-muller transform
+        do {
+            u = 2 * random(0, 1) - 1;
+            v = 2 * random(0, 1) - 1;
+            r = u * u + v * v;
+        } while (r <= 0 || r > 1);
+        
+        return u * sqrt(-2 * log(r) / r);
+    }
+    
+    static float sample(float mean, float stddev) {
+        return mean + stddev * sample();
     }
 }
 

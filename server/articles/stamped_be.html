@@ -1,0 +1,79 @@
+{% extends "article.html" %}
+
+{% block class %}double{% endblock class %}
+{% block id    %}stamped_be{% endblock id %}
+{% block tags  %}stamped backend{% endblock tags %}
+{% block date  %}6/5/2013{% endblock date %}
+{% block title %}Stamped Backend{% endblock title %}
+
+{% block content %}
+    <h1>Overview</h1>
+    
+    <p>
+        I was the lead engineer at a startup called Stamped for a year and a half, taking it from concept to a robust, reasonably complex production service over the course of a year and a half, two public launches, and an eventual acquisition by Yahoo. I learned a lot while at Stamped, but the purpose of this post will be to focus on the technical aspects of the backend infrastructure we put together in order to support an efficient, stable service.
+    </p>
+    
+    <p>
+        The Stamped platform was comprised of a web client, iOS client, and a shared RESTful backend API. I will be discussing the Stamped web client (hosted <a href="http://stamped.transitivebullshit.com">here</a> for historical purposes) in another post. We made the decision early on to use Python as our primarily backend language because it was so quick to develop with, myself and our one technical cofounder were already proficient in Python, it has great community and open-source library support, and our primary motivation at first was rapid prototyping which Python is great at. I'll discuss why a year and a half later we found ourselves questioning this decision towards the end of this post, but I still think Python is a very good all around choice for rapid backend development.
+    </p>
+    
+    <p>
+        We chose to host our backend on AWS primarily because it was proven to be so stable and guaranteed to allow for easy horizontal scaling in the future (assuming we did our due diligence on all fronts). We were luckily enough to be well-funded courtesy of Bain and Google Ventures, so IMHO the largest downside of AWS being its relative pricepoint compared to other similar hosting options wasn't a deal breaker, and after almost two years of experience working with almost all of the AWS technologies, I can say without a doubt in my mind that I was pleasantly surprised by how great and consistent they were across the board.
+    </p>
+    
+    <h1>The Life of a Request</h1>
+    
+    <p>
+        I find it useful to explain a BE stack from the top-down perspective of the lifecycle of an individual API request. All requests begin at a client and are routed through <a href="http://aws.amazon.com/route53/">Route53</a>’s DNS, then are distributed evenly via an <a href="http://aws.amazon.com/elasticloadbalancing/">ELB</a> (Elastic Load Balancer) to an API server. Each API server runs its own web stack of <a href="http://nginx.org/">Nginx</a>, <a href="http://gunicorn.org/">Gunicorn</a>, <a href="https://www.djangoproject.com/">Django</a> and our custom python API code.
+    </p>
+    
+    <p>
+        The Stamped internal API then parses and authenticates each request. The API servers are <b>stateless</b> and depend on our <a href="http://www.mongodb.org/">Mongo</a> database to store and retrieve user data, and are responsible for coordinating the creation and enrichment of our data about stampable entities.
+    </p>
+    
+    <p>
+        Our entities cover a number of verticals from artists to books to restaurants, and we utilize over a dozen third-party services to provide metadata and to enable meaningful actions, such a downloading a song from iTunes. We generate these entities both eagerly and lazily in response to user queries.
+    </p>
+    
+    <p>
+        To fulfill a request, the python API layer typically performs one or more of the following actions:
+        
+        <ul>
+            <li>Reading from and/or writing to the shared MongoDB replica set</li>
+            <li>Reading from and/or writing to the shared <a href="http://memcached.org/">Memcached</a> cache</li>
+            <li>Dispatching work to the asynchronous task message broker</li>
+            <li>Asynchronous tasks are brokered to one of the N worker servers (originally via <a href="http://celery.readthedocs.org/en/latest/index.html">Celery</a> though we ended up switching to <a href="http://gearman.org/">Gearman</a> because of problems under production traffic)</li>
+            <li>Writing real-time stats to <a href="http://codeascraft.com/2011/02/15/measure-anything-measure-everything/">StatsD</a> on the monitor server</li>
+            <li>Possibly making one or more calls to external, third-party APIs</li>
+        </ul>
+    </p>
+    
+    <a class="fancybox" href="{{ STATIC_ASSET_BASE }}img/stamped.be.diagram.png"><img class="article-img-large" src="{{ STATIC_ASSET_BASE }}img/stamped.be.diagram.png"></a>
+    
+    <h1>Post-mortem</h1>
+    
+    <p>
+        When I first started at Stamped, I began eagerly reading everything I could about startup infrastructure, trying to gain a deeper understanding of the types of tradeoffs between different engineering decisions like choosing a language, frameworks, database, hosting provider, etc. After a fairly successful startup run, I strongly feel that while understanding what currently exists and how other companies have approached similar engineering problems is important and should not be overlooked, the underlying tools are constantly changing and if I were to do a startup with similar engineering requirements today, I'd choose to change many of the specifics, and it's these subtleties that I'd like to discuss here.
+    </p>
+    
+    <h2>Python</h2>
+    
+    <p>
+        Python is a great language and a popular one for startups. Unfortunately, the startup mentality of go-go-go lends itself to quick development that can quickly and easily suffer from lack of testing and code coverage. This isn't a big problem at first, but as the codebase and team size grow, it becomes more and more of a problem especially in a very loose language like Python (this same argument applies to Javascript which is why I'd seriously avoid node.js for any non-trivial project). Yes, I'm a professional software engineer who understands the immense value of proper testing and if it were up to me, we would've had continuous integration setup from day one with a combination of unit and stress testing, but it's very easy in a startup environment to be pushed by product and investors alike to develop for quick results at the expense of these types of so-called secondary development concerns. For Stamped, we ended up having several large bugs appear the night of a large launch, and it took nothing short of an amazing full team effort on one of the longest dev-ops nights of my life to track things down while keeping traffic in check. This is precisely why post-mortems are so important!
+    </p>
+    
+    <p>
+        So aside from sticking to my developer guns a little more readily when feeling pressure from product to make quicker progress and forego proper testing, one of the largest takeaways I have from my experience at Stamped is that I will not be using Python (or Javascript for that matter) for any large, professional projects in the future unless there's a strong pre-existing codebase or team that's already biased towards it. I've been working a lot lately with <a href="http://www.scala-lang.org/">Scala</a> and would strongly recommend anyone interested in modern startup infrastructure consider it before choosing a language. It's library interop with Java is great, so even though it's not the most mature language in terms of libraries, it's incredibly easy to take advantage of the mature Java community for all your open-source library needs. As a language, it enforces type-safety and scales to larger codebases and team sizes much more easily than Python/Javascript, and its support for functional primitives and concurrency is second to none, especially without resorting to something like <a href="http://www.gevent.org/">gevent</a> (if you're using Python you should probably be using gevent!).
+    </p>
+    
+    <h2>MongoDB</h2>
+    
+    <p>
+        MongoDB has received a lot of mixed reviews from people in the industry. I could write a whole post about my experience and thoughts on Mongo, and I may do that at a later time, but for now I'll try to be succinct. Overall, I love MongoDB. Using JSON as the document format is awesome for quick development, and Stamped never ran into any serious issues using MongoDB for over a year in production under intermittent heavy traffic. I did have the opportunity to speak with Kevin Systrom about Instagram's use of MongoDB, the problems they encountered, and their eventual move to <a href="http://www.postgresql.org/">PostgreSQL</a>, but to be honest, the version of Mongo they were using was a much less mature product than what exists today. I have several friends at 10gen (the company who makes MongoDB), and both my personal experience with Mongo as well as the development and maturity-rate that I've seen from them would make not not hesitate to use it again in future projects.
+    </p>
+    
+    <p>
+        The one recommendation I have would be to start off using a hosted solution ala <a href="https://www.mongohq.com/home">MongoHQ</a> because we found ourselves dealing a lot with database management early on setting up proper solutions to backups, monitoring, etc., that we could've used to make faster progress on our core product. If you release V1 of your product and find yourself hockeysticking, that IMHO is the time to invest in migrating to a longer-term database solution (possibly sticking with the same hosting provider or switching to your own hosting), but spending too much time reinventing the wheel on something which absolutely needs to be robust and full-proof for the first version of your product when you could use a solid existing solution is just a waste of engineering time and resources.
+    </p>
+{% endblock content %}
+

@@ -50,7 +50,6 @@ void reset() {
     _map0 = new int[width * height];
     _map1 = new int[width * height];
     
-    println(BACKGROUND_IMAGES[BACKGROUND_IMAGE_INDEX]);
     loadBackground(loadImage(BACKGROUND_IMAGES[BACKGROUND_IMAGE_INDEX]));
 }
 

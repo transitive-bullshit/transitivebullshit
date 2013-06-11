@@ -4,7 +4,7 @@ def get_sketches():
     return [
         {
             'name'  : 'not_found', 
-            'hname' : '404 Page RRT Experiment', 
+            'hname' : '404 Page RRT', 
             'desc'  : "404 page utilizing rapidly exploring random trees (<a href='http://en.wikipedia.org/wiki/Rapidly_exploring_random_tree'>RTTs</a>).", 
         }, 
         {
@@ -26,7 +26,7 @@ def get_sketches():
         {
             'name'  : 'primordial', 
             'hname' : 'Primordial', 
-            'desc'  : "Petri dish simulation with comprised of several types of hierarchical organisms.", 
+            'desc'  : "Petri dish simulation comprised of several types of hierarchical organisms.", 
         }, 
         {
             'name'  : 'gravity', 
@@ -63,7 +63,7 @@ def get_sketches():
         }, 
         {
             'name'  : 'intersection2', 
-            'hname' : 'intersection2', 
+            'hname' : 'Intersection2', 
             'desc'  : "Combining the gravity sketch's movement with the intersection sketch's visualization.", 
         }, 
     ]

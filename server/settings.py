@@ -107,6 +107,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'urls'
 
 TEMPLATE_ROOT = os.path.join(PROJ_ROOT, "html")
+ARTICLE_ROOT  = os.path.join(PROJ_ROOT, "articles")
 TEMPLATE_FILE = os.path.join(TEMPLATE_ROOT, "handlebars.generated.html")
 
 TEMPLATE_DIRS = (
@@ -114,7 +115,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     TEMPLATE_ROOT, 
-    os.path.join(TEMPLATE_ROOT, "templates"), 
+    ARTICLE_ROOT, 
 )
 
 # A tuple of strings representing allowed prefixes for the {% ssi %} template 

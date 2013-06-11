@@ -1,0 +1,22 @@
+{% extends "article.html" %}
+
+{% block class %}single{% endblock class %}
+{% block id    %}processing{% endblock id %}
+{% block tags  %}processing{% endblock tags %}
+{% block date  %}6/8/2013{% endblock date %}
+{% block title %}Live Processing Experiments{% endblock title %}
+
+{% block content %}
+    <p>
+        I love creating interesting procedural art, and there are few tools out there that are as approachable as <a href="http://www.processing.org/">Processing</a>/<a href="http://processingjs.org/">Processing.js</a>. I was also particularly struck by an <b>excellent</b> live programming <a href="http://processingjs.org/">talk</a> by <a href="http://worrydream.com/">Bret Victor</a> and decided to merge the two to create an visual programming environment that's easy to use and encourages experimentation! This led me to create <a href="{{ STATIC_ASSET_BASE }}js/processing.abstraction.js">processing.abstraction.js</a> and a slew of demo visualizations.
+    </p>
+    
+    <p>
+        It's definitly worth noting that John Resig of jQuery fame has created a similar live programming <a href="http://ejohn.org/blog/introducing-khan-cs/">environment</a> for learning purposes over at the Khan Academy. For anyone looking to learn programming and/or computer science fundamentals, this looks like a great resource! Note that processing.abstraction.js differs from the Khan Academy's offerings in that it has a slightly different target audience and is more constrained to the original code with the author explicitly stating which variables may be manipulated and setting reasonable limits for certain parameters. In a way it's a complementary offering but to be honest, I just wanted to create it because it was fun and I'm constantly finding myself wanting to expose the same visualization with different tweakable parameters that only make sense within certain ranges, and doing this generically by forking processing.js itself made more sense to me than exposing a different UI with tweakable parameters for each sketch that I made going forward. Also it's simply a ton of fun to play with!
+    </p>
+    
+    <p>
+        Each sketch's URL is updated when you make a change, so modifications are saveable/linkable! If you play around with one of the sketches and find a particular set of parameters that produces something awesome, feel free to share!!
+    </p>
+{% endblock content %}
+

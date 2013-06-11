@@ -6,12 +6,35 @@ Sections:
     * About
 
 Articles:
-    * About
-    * Processing
-    * Stamped BE stack
+    * Misc:
+        * About
+        * TODO: Interviewing http://basicalgos.blogspot.com/
+    * Projects:
+        * Processing
+            * TODO: Better n-body simulation!
+            * TODO: Figure out what's wrong with mousePressed, mouseDragged in displaced and substrate
+        * Stamped BE stack
+        * TODO: TI games
+        * TODO: Milton
+        * TODO: Up
+            * http://www.pixar.com/features_films/UP#Film-Trailers/Making Of/node/3888
     * Scalability
-        * Design patterns for properly isolating components
+        * TODO: Design patterns for properly isolating components
         * https://github.com/Netflix/Hystrix
         * http://techblog.netflix.com/2011/12/making-netflix-api-more-resilient.html
-    * article about folding map
+    * HTML5:
+        * article about folding map
+            * TODO:
+                * better explanation
+        * generic blur filters
+            * TODO:
+                * better explanation
+                * include compatibility chart
+
+Client:
+    * Better format for articles:
+        * tags
+        * use article element instead of div
+        * standardize title, content, footer, etc.
+    * If an article is cut-off, show see full article link => lightbox popup
 

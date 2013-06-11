@@ -26,7 +26,7 @@
  * NOTE: the css version of this file is auto-generated, so only edit the original 
  * less version if you don't want your changes to be overwritten.
  * 
- * Copyright (c) 2011-2012 Stamped Inc.
+ * Copyright (c) 2013 Travis Fischer
  */
 /* **************************************************************************
                               STYLING CONSTANTS
@@ -44,9 +44,11 @@ html {
 }
 body {
   font-family: 'helvetica', sans-serif;
-  font-size: 1em;
+  /*font-family: 'georgia', 'times new roman', 'times', serif;*/
+
+  font-size: 15px;
   background: #fff;
-  color: #666;
+  color: #595959;
 }
 a,
 a:link {
@@ -58,16 +60,16 @@ a:focus {
 }
 a,
 a:visited {
-  color: #666;
-  /* #3366cc; */
-
   text-decoration: none;
 }
-a:visited {
-  color: #444;
+a {
+  color: #498FF2;
 }
 a:hover {
-  color: black;
+  color: #67ADFF;
+}
+a:active {
+  color: #1066df;
 }
 ol,
 ul {
@@ -77,13 +79,13 @@ ul {
   padding: 0;
   margin: 0;
 }
-.active-link {
-  color: #438FED !important;
-}
 .replaced {
   display: block;
   text-indent: -9999em;
   overflow: hidden;
+}
+.hidden {
+  display: none;
 }
 .floatleft {
   float: left;
