@@ -1,10 +1,11 @@
 /*! test.pde
  */
 
-/* @pjs transparent=true; */
+/* @pjs transparent="true"; */
+/* @pjs pauseOnBlur="true"; */
 
-static int NUM_ORGANISMS        = /** int [ 1, 100 ]  **/ 15  /** endint **/;
-static int MAX_NUM_OCTOPI       = /** int [ 0, 100 ]  **/ 3   /** endint **/;
+static int NUM_ORGANISMS        = /** int [ 1, 100 ]  **/ 18  /** endint **/;
+static int MAX_NUM_OCTOPI       = /** int [ 0, 100 ]  **/ 4  /** endint **/;
 
 static boolean SINGLE_CELLED    = /** boolean **/ false /** endboolean **/;
 static boolean FLAGELLA         = /** boolean **/ true  /** endboolean **/;
@@ -70,12 +71,6 @@ void reset() {
         
         float x = random(width);
         float y = random(height);
-        //float x = width  / 2.0;
-        //float y = height / 2.0;
-        
-        //o = new Cell(x, y);
-        //o = new Flagellum(x, y);
-        //o = new Octopus(x, y);
         
         if (rand < chanceOfSingle) {
             o = new Cell(x, y);

@@ -57,7 +57,6 @@
             $(this).find('.view-full-article')[0].href = '/articles/' + this.id;
         });
         
-        //$('#processing').width("100%").height("100%");
         init_articles();
     });
 })();
