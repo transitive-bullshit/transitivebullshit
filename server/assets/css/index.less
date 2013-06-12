@@ -45,6 +45,15 @@ body {
     
     width:  100%;
     height: 100%;
+    
+    pointer-events: none;
+    display: none;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    #background-canvas {
+        display: block;
+    }
 }
 
 article {
@@ -65,11 +74,14 @@ article {
     .rounded(4px);
     .box-shadow(0, 2px, 25px, 0, @shadow);
     
-    .title {
+    .title, h1, h2 {
         text-align: left;
         font: 1.8em 'Droid Sans', sans-serif;
         color: #498FF2;
     }
+    
+    h1 { font-size: 1.5em; }
+    h2 { font-size: 1.2em; }
 }
 
 .single {
@@ -129,6 +141,20 @@ article {
     margin: 4px auto;
 }
 
+.no-frills {
+    .rounded(0);
+    .box-shadow(0, 0, 0, #fff);
+}
+
+.article-img-ticalc {
+    margin: 0 0 8px 16px;
+    display: block;
+    float: right;
+    
+    width:  160px;
+    height: 100px;
+}
+
 .view-full-article {
     display: none;
     
@@ -143,6 +169,14 @@ article {
     text-align: center;
     
     background: rgba(58, 42, 45, 0.85);
+    
+    .transition(all, 0.2s, ease-out);
+    
+    &:hover {
+        height: 3em;
+        line-height: 3em;
+        font-weight: bold;
+    }
 }
 
 .overflowed {
@@ -151,6 +185,17 @@ article {
     .view-full-article {
         display: block;
     }
+}
+
+.fancybox-inner article {
+    max-height: auto;
+    width: auto;
+    
+    margin: 0;
+    border: 0 none;
+    
+    .rounded(0);
+    .box-shadow(0, 0, 0, 0, @shadow);
 }
 
 
@@ -435,7 +480,8 @@ article .static-map-small {
 
 .screenshot {
     position: relative;
-    float: left;
+    display: block;
+    float: right;
     
     margin: 12px;
     width:  160px;
@@ -454,6 +500,113 @@ article .static-map-small {
         .animated-screenshot {
             opacity: 1;
         }
+    }
+}
+
+.link {
+    margin: .5em 1.5em 0 .5em;
+    min-width: 8em;
+    float: left;
+    
+    .ss-icon {
+        position: relative;
+        top: .25em;
+        
+        font-size: 150%;
+        color: #333;
+        margin: 0 .5em 0;
+        
+        .transition(all, 0.2s, ease);
+    }
+    
+    a:hover {
+        .ss-icon {
+            color: #67ADFF;
+        }
+    }
+    
+    a:active {
+        .ss-icon {
+            color: darken(#498FF2, 15%);
+        }
+    }
+}
+
+#navigation {
+    position: fixed;
+    top:   1em;
+    right: 1em;
+    z-index: 1000;
+    
+    .nav {
+        position: relative;
+        display:  block;
+        
+        color: #595959;
+        font-size: 2.5em;
+        
+        .icon {
+            display: block;
+            
+            .transform(scale(.75, .75));
+            .transition-transform2(0.3s, ease-out, color, 0.3s, ease-out);
+        }
+        
+        .desc {
+            position: absolute;
+            display:  block;
+            
+            top:  .2em;
+            left: 0;
+            
+            font-size: .8em;
+            
+            opacity: 0;
+            .transform(translatex(0));
+            .transition(all, 0.3s, ease-out);
+            
+            /*@duration: 0.3s;
+            @ease: ease-out;
+            
+            -webkit-transition: -webkit-transform @duration @ease, color @duration1 @ease1;
+            -moz-transition:    -moz-transform    @duration @ease, color @duration1 @ease1;
+            -ms-transition:     -ms-transform     @duration @ease, color @duration1 @ease1;
+            -o-transition:      -o-transform      @duration @ease, color @duration1 @ease1;
+            transition:         transform         @duration @ease, @target1 @duration1 @ease1;*/
+        }
+        
+        &:hover {
+            color: #67ADFF;
+            
+            .icon {
+                .transform(scale(1, 1));
+                .transition-transform2(0, ease-out, color, 0, ease-out);
+            }
+            
+            .desc {
+                opacity: 1;
+            }
+        }
+    }
+    
+    .nav-all:hover .desc {
+        .transform(translatex(-42px));
+    }
+    
+    .nav-project:hover .desc {
+        .transform(translatex(-114px));
+    }
+    
+    .nav-article:hover .desc {
+        .transform(translatex(-103px));
+    }
+    
+    .nav-art:hover .desc {
+        .transform(translatex(-110px));
+    }
+    
+    .nav-about:hover .desc {
+        .transform(translatex(-86px));
     }
 }
 

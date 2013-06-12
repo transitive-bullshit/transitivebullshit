@@ -18,6 +18,9 @@ urlpatterns = patterns('',
     
     # e.g., transitivebullshit.com/test
     url(r'^test\/?$',                           'core.views.test'), 
+    
+    # e.g., transitivebullshit.com/articles/about
+    url(r'^articles\/(?P<article>[\w-]{1,30})\.html?\/?$',  'core.views.article'), 
 )
 
 def custom_static(prefix, view='django.views.static.serve', **kwargs):

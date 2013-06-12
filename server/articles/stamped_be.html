@@ -2,11 +2,13 @@
 
 {% block class %}double{% endblock class %}
 {% block id    %}stamped_be{% endblock id %}
-{% block tags  %}stamped backend{% endblock tags %}
+{% block tags  %}stamped article project{% endblock tags %}
 {% block date  %}6/5/2013{% endblock date %}
 {% block title %}Stamped Backend{% endblock title %}
 
 {% block content %}
+    <a href="http://stamped.transitivebullshit.com"><img class="article-img-hero no-frills" src="{{ STATIC_ASSET_BASE }}img/stamped-logo.png" /></a>
+    
     <h1>Overview</h1>
     
     <p>
@@ -18,7 +20,7 @@
     </p>
     
     <p>
-        We chose to host our backend on AWS primarily because it was proven to be so stable and guaranteed to allow for easy horizontal scaling in the future (assuming we did our due diligence on all fronts). We were luckily enough to be well-funded courtesy of Bain and Google Ventures, so IMHO the largest downside of AWS being its relative pricepoint compared to other similar hosting options wasn't a deal breaker, and after almost two years of experience working with almost all of the AWS technologies, I can say without a doubt in my mind that I was pleasantly surprised by how great and consistent they were across the board.
+        We chose to host our backend on AWS primarily because it was proven to be so stable and guaranteed to allow for easy horizontal scaling in the future (assuming we did our due diligence on all fronts). One of the largest downsides to AWS is its relative pricepoint compared to other similar hosting options, but for us that wasn't a deal breaker, and after almost two years of experience working with AWS, I can say without a doubt in my mind that I was pleasantly surprised by how great and consistent they were across the board.
     </p>
     
     <h1>The Life of a Request</h1>

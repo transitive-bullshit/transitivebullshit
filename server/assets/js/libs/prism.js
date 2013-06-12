@@ -681,6 +681,7 @@ var Extensions = {
     'less': 'css'
 };
 
+Prism.highlightAll2 = function() {
 Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function(pre) {
 	var src = pre.getAttribute('data-src');
 	var extension = (src.match(/\.(\w+)$/) || [,''])[1];
@@ -719,6 +720,8 @@ Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(f
 	
 	xhr.send(null);
 });
+};
+Prism.highlightAll2();
 
 })();;
 Prism.languages.markup = {

@@ -42,3 +42,20 @@ def test(request, *args, **kwargs):
         'title' : 'Transitive Bullshit - Test', 
     })
 
+@view()
+def article(request, *args, **kwargs):
+    ajax = bool(kwargs.get('ajax', 'False'))
+    article_id = kwargs.get('article', None)
+    
+    if ajax:
+        article_id = article_id.strip().lower()
+        template = '%s.html' % article_id
+        
+        return render_template(request, template, {})
+    
+    print ""
+    print ""
+    print "NOT AJAX: %s, %s" % (ajax, article_id)
+    print ""
+    print ""
+

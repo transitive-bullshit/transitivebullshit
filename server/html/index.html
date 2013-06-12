@@ -3,10 +3,13 @@
 {% block styles %}
     {{ block.super }}
     
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Droid+Sans'>
+    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}fonts/ss-social-circle/ss-social-circle.css">
+    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}fonts/transitivebullshit/transitivebullshit.css">
+    
     <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/libs/isotope.css">
     <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/libs/prism.css">
     <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/libs/jquery/jquery.fancybox.css">
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Droid+Sans'>
     <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/blur.css">
     <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/index.css">
 {% endblock styles %}
@@ -18,14 +21,34 @@
     </header>
     
     <div id="content">
-        <canvas class="blur_8" id="background-canvas" data-processing-sources="{{ STATIC_ASSET_BASE }}pde/test/test.pde"></canvas>
+        <div id="navigation">
+            <a class="nav nav-all" data-filter="*" href="#">
+                <span class="desc">All</span><span class="icon icon-th-2"></span>
+            </a>
+            
+            <a class="nav nav-project" data-filter="[data-tags~=project]" href="#">
+                <span class="desc">Projects</span><span class="icon icon-project"></span>
+            </a>
+            
+            <a class="nav nav-article" data-filter="[data-tags~=article]" href="#">
+                <span class="desc">Articles</span><span class="icon icon-article"></span>
+            </a>
+            
+            <a class="nav nav-art" data-filter="[data-tags~=art]" href="#">
+                <span class="desc">Artwork</span><span class="icon icon-art"></span>
+            </a>
+            
+            <a class="nav nav-about" data-filter="[data-tags~=about]" href="#">
+                <span class="desc">About</span><span class="icon icon-about"></span>
+            </a>
+        </div>
         
         <div class="articles">
             {% include "static_map_article.html" %}
             {% include "css_blur_filters.html" %}
             
             {% for sketch in PROCESSING_SKETCHES %}
-                <article class="single sketch" id="sketch-{{sketch.name}}" data-tags="processing" data-date="6/8/13">
+                <article class="single sketch" id="sketch-{{sketch.name}}" data-tags="processing art" data-date="6/8/13">
                     <div class="title"><a href="/processing?sketch={{sketch.name}}">{{ sketch.hname|safe }}</a></div>
                     <p class="desc">{{ sketch.desc|safe }}</p>
                     
@@ -42,11 +65,14 @@
             {% include "milton.html" %}
             {% include "pixar.html" %}
             {% include "ticalc.html" %}
-            {% include "links.html" %}
             {% include "about.html" %}
+            {% include "links.html" %}
         </div>
     </div>
     
+    <footer>
+        © 2013 Travis Fischer
+    </footer>
     <!--<div id="disqus_thread"></div>-->
 {% endblock content %}
 
@@ -57,16 +83,18 @@
     <script src="{{ STATIC_ASSET_BASE }}js/libs/jquery/jquery.fancybox.js"></script>
     <script src="{{ STATIC_ASSET_BASE }}js/libs/prism.js"></script>
     <script src="{{ STATIC_ASSET_BASE }}js/libs/processing-1.4.1.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/ss-social.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/jquery/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="{{ STATIC_ASSET_BASE }}js/index.js"></script>
     
     <script>
-        var disqus_shortname = 'transitivebullshit';
+        /*var disqus_shortname = 'transitivebullshit';
         
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
+        })();*/
     </script>
 {% endblock scripts %}
 

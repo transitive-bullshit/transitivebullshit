@@ -93,3 +93,7 @@ ul {
 .floatright {
   float: right;
 }
+footer {
+  text-align: center;
+  padding: 5px;
+}

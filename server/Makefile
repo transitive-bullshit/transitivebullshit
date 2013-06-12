@@ -17,22 +17,15 @@ $(if $(shell [ -d $(PROJECT_BASE_LIB) ] && echo "exists"),,                     
 
 include $(PROJECT_BASE_LIB)/defines.mk
 
-ASSET_VERSION_NUMBER        = 0.0.1
-GENERATED_LINE_LENGTH		= 512
+LESS_CSS_DIRS               = assets/css assets/css/libs
+LESS_CSS_PROG               = lessc
+LESS_CSS_SOURCE_SUFFIX      = less
+LESS_CSS_TARGET_SUFFIX      = css
+LESS_CSS_SOURCES            = $(strip \
+    $(foreach DIR,$(LESS_CSS_DIRS),$(wildcard $(DIR)/*.$(LESS_CSS_SOURCE_SUFFIX))))
+LESS_CSS_TARGETS            = $(LESS_CSS_SOURCES:%.$(LESS_CSS_SOURCE_SUFFIX)=%.$(LESS_CSS_TARGET_SUFFIX))
 
-GET_JS_DEPENDENCIES			= $(foreach FILE,$(shell grep '^ *script: *' $1 | sed 's/ *script: *\([\w.\/-]*\) */\1/g' | tr '\n' ' '),$(JS_BASE_DIR)/$(FILE))
-GET_CSS_DEPENDENCIES		= $(foreach FILE,$(shell grep '^ *stylesheet: *' $1 | sed 's/ *stylesheet: *\([\w.\/-]*\) */\1/g' | tr '\n' ' '),$(CSS_BASE_DIR)/$(FILE))
-GET_TEMPLATE_DEPENDENCIES	= $(foreach FILE,$(shell grep '^ *template: *' $1 | sed 's/ *template: *\([\w.\/-]*\) */\1/g' | tr '\n' ' '),$(TEMPLATE_BASE_DIR)/$(FILE))
-
-JS_TARGETS					= $(foreach PAGE,$(HTML_PAGES),$(GENERATED_JS_BASE_DIR)/$(PAGE)$(GENERATED_ASSET_SUFFIX).js)
-CSS_TARGETS					= $(foreach PAGE,$(HTML_PAGES),$(GENERATED_CSS_BASE_DIR)/$(PAGE)$(GENERATED_ASSET_SUFFIX).css)
-TEMPLATE_TARGETS			= $(foreach PAGE,$(HTML_PAGES),$(TEMPLATE_BASE_DIR)/$(PAGE).generated.html)
-
-TEMPLATES 					= $(strip \
-	$(foreach DIR,$(TEMPLATE_DIRS),$(wildcard $(DIR)/*.$(TEMPLATE_SUFFIX))))
-
-DEPENDENCIES				= $(TEMPLATES) $(TEMPLATE_PROG) $(wildcard core/templatetags/*.py)
-ALL_TARGETS					= $(LESS_CSS_TARGETS) $(JS_TARGETS) $(TEMPLATE_TARGETS) css_targets $(CSS_TARGETS)
+ALL_TARGETS					= $(LESS_CSS_TARGETS) 
 
 define ADD_LESS_CSS_TARGET
 $1/%.$(LESS_CSS_TARGET_SUFFIX): $1/%.$(LESS_CSS_SOURCE_SUFFIX)
@@ -41,57 +34,12 @@ $1/%.$(LESS_CSS_TARGET_SUFFIX): $1/%.$(LESS_CSS_SOURCE_SUFFIX)
 	@echo
 endef
 
-define ADD_JS_TARGET
-$(GENERATED_JS_BASE_DIR)/$1$(GENERATED_ASSET_SUFFIX).js: $(HTML_BASE_DIR)/$1.$(HTML_SUFFIX) $(call GET_JS_DEPENDENCIES,$(HTML_BASE_DIR)/$1.$(HTML_SUFFIX))
-	@mkdir -p $(GENERATED_JS_BASE_DIR)
-	@$$(CECHO) "cat $$(BOLD_COLOR)$$(FR_COLOR_RED)$$(if $$(call ISNULL,$$(strip $$(call REST,$$^))),/dev/null,$$(call REST,$$^))$$(END_COLOR) | java -jar bin/compressor.jar --type js --nomunge --line-break $(GENERATED_LINE_LENGTH) > '$$(BOLD_COLOR)$$(FR_COLOR_GREEN)$$@$$(END_COLOR)'"
-	@cat $$(if $$(call ISNULL,$$(strip $$(call REST,$$^))),/dev/null,$$(call REST,$$^)) | java -jar bin/compressor.jar --type js --nomunge --line-break $(GENERATED_LINE_LENGTH) > $$@
-	@echo
-endef
-
-define ADD_CSS_TARGET
-$(GENERATED_CSS_BASE_DIR)/$1$(GENERATED_ASSET_SUFFIX).css: $(HTML_BASE_DIR)/$1.$(HTML_SUFFIX) css_targets $(call GET_CSS_DEPENDENCIES,$(HTML_BASE_DIR)/$1.$(HTML_SUFFIX))
-	@mkdir -p $(GENERATED_CSS_BASE_DIR)
-	cat $$(if $$(call ISNULL,$$(strip $$(call REST,$$(call REST,$$^)))),/dev/null,$$(call REST,$$(call REST,$$^))) | java -jar bin/compressor.jar --type css --line-break $(GENERATED_LINE_LENGTH) > $$@
-	@echo
-endef
-
-define ADD_TEMPLATE_TARGET
-$(TEMPLATE_BASE_DIR)/$1.generated.html: $(HTML_BASE_DIR)/$1.$(HTML_SUFFIX) $(call GET_TEMPLATE_DEPENDENCIES,$(HTML_BASE_DIR)/$1.$(HTML_SUFFIX))
-	@$$(CECHO) "$(TEMPLATE_PROG) $$(foreach FILE,$$(call REST,$$^),-t $$(BOLD_COLOR)$$(FR_COLOR_RED)$$(notdir $$(FILE))$$(END_COLOR)) -o $$(BOLD_COLOR)$$(FR_COLOR_GREEN)$$@$$(END_COLOR)"
-	@$(TEMPLATE_PROG) $$(foreach FILE,$$(call REST,$$^),-t $$(notdir $$(FILE))) -o $$@
-	@echo
-endef
 
 all: $(ALL_TARGETS)
 
-.PHONY: all clean help update update_version deploy css_targets
-
 $(foreach DIR,$(LESS_CSS_DIRS),$(eval $(call ADD_LESS_CSS_TARGET,$(DIR))))
-$(foreach PAGE,$(HTML_PAGES),  $(eval $(call ADD_JS_TARGET,$(PAGE))))
-$(foreach PAGE,$(HTML_PAGES),  $(eval $(call ADD_TEMPLATE_TARGET,$(PAGE))))
-$(foreach PAGE,$(HTML_PAGES),  $(eval $(call ADD_CSS_TARGET,$(PAGE))))
 
-css_targets: $(LESS_CSS_TARGETS);
-
-deploy: $(ALL_TARGETS)
-	mkdir -p $(GENERATED_CSS_BASE_DIR)/ie/$(ASSET_VERSION_NUMBER)
-	mkdir -p $(GENERATED_PDE_BASE_DIR)/$(ASSET_VERSION_NUMBER)
-	cp -rf assets/pde/* $(GENERATED_PDE_BASE_DIR)/$(ASSET_VERSION_NUMBER)
-	cp -rf assets/css/ie/* $(GENERATED_CSS_BASE_DIR)/ie/$(ASSET_VERSION_NUMBER)
-	cp -rf assets/css/mobile $(GENERATED_CSS_BASE_DIR)/
-	cd bin && python deploy_assets.py
-
-update_version:
-	@echo $(ASSET_VERSION_NUMBER)
-	cd bin && python deploy_version.py
-
-update:
-	@echo $(ASSET_VERSION_NUMBER)
-	cd bin && python deploy_version.py
-
-version:
-	@echo $(ASSET_VERSION_NUMBER)
+.PHONY: all clean help
 
 clean:
 	$(RM) -rf $(GENERATED_BASE_DIR)
