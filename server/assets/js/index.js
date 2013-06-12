@@ -41,6 +41,10 @@
             }).each(function(i) {
                 $(this).delay(1000 + i * 200).animate({ left : 0, opacity : 1 }, 700, "easeOutBack");
             });
+            
+            setTimeout(function() {
+                $articles.isotope("reLayout");
+            }, 2000);
         };
         
         $('article').filter(function(i) {

@@ -24,4 +24,5 @@ Articles:
 
 Client:
     * full article popup working with links and history
+    * switch to using packery instead of isotope
 
