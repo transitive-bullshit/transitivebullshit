@@ -13,14 +13,21 @@ urlpatterns = patterns('',
     url(r'^index\.html?$',                      'core.views.index'), 
     url(r'^/?$',                                'core.views.index'), 
     
+    url(r'^mobile/index$',                      'core.views.index'), 
+    url(r'^mobile/index\.html?$',               'core.views.index'), 
+    url(r'^mobile/?$',                          'core.views.index'), 
+    
     # e.g., transitivebullshit.com/processing
     url(r'^processing\/?$',                     'core.views.processing'), 
+    url(r'^mobile/processing\/?$',              'core.views.processing'), 
     
     # e.g., transitivebullshit.com/test
     url(r'^test\/?$',                           'core.views.test'), 
+    url(r'^mobile/test\/?$',                    'core.views.test'), 
     
     # e.g., transitivebullshit.com/articles/about
     url(r'^articles\/(?P<article>[\w-]{1,30})\.html?\/?$',  'core.views.article'), 
+    url(r'^mobile/articles\/(?P<article>[\w-]{1,30})\.html?\/?$',  'core.views.article'), 
 )
 
 def custom_static(prefix, view='django.views.static.serve', **kwargs):
