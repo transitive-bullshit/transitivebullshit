@@ -7,8 +7,6 @@ Articles:
         * Processing
             * TODO: Better n-body simulation!
             * TODO: Figure out what's wrong with mousePressed, mouseDragged in displaced and substrate
-        * Stamped BE stack
-        * TODO: TI games
     * Scalability
         * TODO: Design patterns for properly isolating components
         * https://github.com/Netflix/Hystrix
@@ -24,5 +22,4 @@ Articles:
 
 Client:
     * full article popup working with links and history
-    * switch to using packery instead of isotope
 

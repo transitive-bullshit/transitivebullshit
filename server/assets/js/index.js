@@ -95,6 +95,7 @@
         $(".fancybox_ajax").fancybox({
             autoSize    : false, 
             autoHeight  : true, 
+            
             width       : '60%', 
             minWidth    : '480', 
             
