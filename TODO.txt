@@ -1,10 +1,4 @@
 
-Sections:
-    * BS
-    * Interactive BS
-    * Professional BS
-    * About
-
 Articles:
     * Misc:
         * About
@@ -15,9 +9,6 @@ Articles:
             * TODO: Figure out what's wrong with mousePressed, mouseDragged in displaced and substrate
         * Stamped BE stack
         * TODO: TI games
-        * TODO: Milton
-        * TODO: Up
-            * http://www.pixar.com/features_films/UP#Film-Trailers/Making Of/node/3888
     * Scalability
         * TODO: Design patterns for properly isolating components
         * https://github.com/Netflix/Hystrix
@@ -32,9 +23,5 @@ Articles:
                 * include compatibility chart
 
 Client:
-    * Better format for articles:
-        * tags
-        * use article element instead of div
-        * standardize title, content, footer, etc.
-    * If an article is cut-off, show see full article link => lightbox popup
+    * full article popup working with links and history
 
