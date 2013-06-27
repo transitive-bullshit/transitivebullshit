@@ -177,10 +177,12 @@
         }
         
         var update_layout = function() {
-            $canvas.css({
-                "margin-top"  : "-" + Math.round($canvas.height() / 2) + "px"
-            });
-            //"right" : Math.max(24, ($body.width() - 48 - $canvas.width()) / 8) + "px", 
+            if (!PRELOAD.bare) {
+                $canvas.css({
+                    "margin-top"  : "-" + Math.round($canvas.height() / 2) + "px"
+                });
+                //"right" : Math.max(24, ($body.width() - 48 - $canvas.width()) / 8) + "px", 
+            }
         };
             
         var init_abstraction = function() {
@@ -199,14 +201,19 @@
             
             if (!!model) {
                 for (key in abstraction_params) {
-                    var variable = vars[key];
-                    
-                    if (!!variable) {
-                        model.set(key, variable.parse_value(abstraction_params[key]));
-                    } else {
-                        if (typeof(window.console) !== 'undefined' && typeof(window.console.log) !== 'undefined') {
-                            console.log("invalid abstraction param: " + key);
+                    try
+                    {
+                        var variable = vars[key];
+                        
+                        if (!!variable) {
+                            model.set(key, variable.parse_value(abstraction_params[key]));
+                        } else {
+                            if (typeof(window.console) !== 'undefined' && typeof(window.console.log) !== 'undefined') {
+                                console.log("invalid abstraction param: " + key);
+                            }
                         }
+                    } catch(e) {
+                        delete abstraction_params[key];
                     }
                 }
                 

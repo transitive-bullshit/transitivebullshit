@@ -17,6 +17,7 @@ def index(request, *args, **kwargs):
 def processing(request, *args, **kwargs):
     sketches = processing_test.get_sketches()
     sketch   = kwargs.get('sketch', None)
+    bare     = kwargs.get('bare', False)
     params   = {}
     
     if sketch is not None:
@@ -32,6 +33,7 @@ def processing(request, *args, **kwargs):
     
     params['page']  = 'processing'
     params['title'] = 'Transitive Bullshit - Processing Lab'
+    params['bare']  = bare
     
     return render_template(request, 'processing.test.html', params)
 

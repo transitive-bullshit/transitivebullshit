@@ -18138,6 +18138,9 @@
     });
     
     var post_process_editor = function() {
+      if (!p.editor) {
+          return;
+      }
       p.editor.parentNode.replaceChild(p.highlighter.div, p.editor);
       p.editor = p.highlighter.div;
       
@@ -18644,10 +18647,14 @@
         }
       }
       
-      var classes = FindValue(
-          p.editor.attributes['class'],    p.editor.className, 
-          p.editor.attributes['language'], p.editor.language
-      );
+      var classes = null;
+      if (!!p.editor) {
+          classes = FindValue(
+              p.editor.attributes['class'],    p.editor.className, 
+              p.editor.attributes['language'], p.editor.language
+          );
+      }
+      
       var language = 'processing';
       var options  = [ ];
       
@@ -18659,8 +18666,10 @@
         }
       }
       
-      // hide the original element
-      p.editor.style.display = 'none';
+      if (!!p.editor) {
+          // hide the original element
+          p.editor.style.display = 'none';
+      }
       
       // instantiate a brush
       p.highlighter = new dp.sh.Brushes[registered[language]]();

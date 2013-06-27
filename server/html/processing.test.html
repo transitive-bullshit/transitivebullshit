@@ -23,12 +23,13 @@
                    data-processing-abstraction-editor="processing-editor">
             </canvas>
         </div>
-        
+        {% if not bare %}
         <div class="editor-column">
             <div class="abstraction-editor">
                 <pre id="processing-editor"></pre>
             </div>
         </div>
+        {% endif %}
     {% else %}
         {% for sketch in PROCESSING_SKETCHES %}
             <div class="sketch">
