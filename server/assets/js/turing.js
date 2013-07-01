@@ -14,10 +14,12 @@
  *   * switch to using ALPHA textures instead of RGBA
  *   * optimize multi-pass blur diffusion
  *   * look into replacing inefficient readPixels for grid normalization
+ *      * could use offset instead of division for storing oo.z with better precision
  *   * HUD with data.GUI
- *      * SIZE
+ *      * options.size
  *      * toggle view individual layers
  *      * multi-pass blur constant
+ *      * proper GL resource cleanup
  */
 
 /* vim: set tabstop=4 shiftwidth=4 softtabstop=4 expandtab: */
@@ -25,9 +27,10 @@
 
 var TuringData = Class.extend(
 {
-    init : function(renderer, size) {
+    init : function(renderer, size, levels) {
         this.renderer = renderer;
-        this.size = size;
+        this.size   = size;
+        this.levels = levels;
         
         this.format = THREE.RGBAFormat;
         this.type   = THREE.FloatType;
@@ -122,6 +125,8 @@ var TuringData = Class.extend(
             updateGrid : new THREE.ShaderMaterial({
                 uniforms: {
                     resolution  : { type: "v2", value: new THREE.Vector2(this.size, this.size) },
+                    
+                    levels      : { type: "f", value: levels }, 
                     
                     p0Variation : { type: "t", value: null }, 
                     p1Variation : { type: "t", value: null }, 
@@ -237,9 +242,9 @@ var TuringData = Class.extend(
         return this.renderer.render(this.scene, this.camera, rt);
     }, 
     
-    blur : function(rtSource, rtDest, rx, ry)
+    blur : function(rtSource, rtDest, radius)
     {
-        var max = Math.max(rx, ry) / 9;
+        var max = radius / 9;
         
         // expensive multipass blur filter to simulate larger blur radii
         for (var i = 0; i < max; ++i) {
@@ -260,19 +265,17 @@ var TuringData = Class.extend(
         }
     }, 
     
-    sampleVariation : function(rtActivator, rtInhibitor, rtVariation, radius)
+    sampleVariation : function(rtActivator, rtInhibitor, rtVariation)
     {
         // horizontal comparison pass
         this.materials.compH.uniforms.source1.value = rtActivator;
         this.materials.compH.uniforms.source2.value = rtInhibitor;
-        this.materials.compH.uniforms.radius.value  = radius;
         
         this.render(this.materials.compH, this.rtTemp);
         
         // vertical comparison pass
         this.materials.compV.uniforms.source1.value = rtActivator;
         this.materials.compV.uniforms.source2.value = rtInhibitor;
-        this.materials.compV.uniforms.radius.value  = radius;
         
         this.render(this.materials.compV, this.rtTemp2);
         
@@ -286,17 +289,14 @@ var TuringData = Class.extend(
 
 var TuringPattern = Class.extend(
 {
-    init : function(data, arx, irx, ary, iry, vsr, ss)
+    init : function(data, ar, ir, ss)
     {
         this.data = data;
         this.size = data.size;
-        this.arx  = arx;
-        this.ary  = ary;
-        this.irx  = irx;
-        this.iry  = iry;
-        this.vsr  = vsr;
+        this.ar   = ar;
+        this.ir   = ir;
         this.ss   = ss;
-    
+        
         { // init gpgpu render targets
             var dtActivator  = this.data.genTexture();
             var dtInhibitor  = this.data.genTexture();
@@ -314,13 +314,13 @@ var TuringPattern = Class.extend(
     
     _diffuse : function(rtGrid)
     {
-        this.data.blur(rtGrid, this.rtActivator, this.arx, this.ary);
-        this.data.blur(rtGrid, this.rtInhibitor, this.irx, this.iry);
+        this.data.blur(rtGrid, this.rtActivator, this.ar);
+        this.data.blur(rtGrid, this.rtInhibitor, this.ir);
     }, 
     
     _sampleVariation : function()
     {
-        this.data.sampleVariation(this.rtActivator, this.rtInhibitor, this.rtVariation, this.vsr);
+        this.data.sampleVariation(this.rtActivator, this.rtInhibitor, this.rtVariation);
     }, 
     
     update : function(rtGrid)
@@ -336,8 +336,41 @@ $(document).ready(function() {
     var container;
     var renderer;
     
-    var SIZE = 128;
+    var options = {
+        'levels' : 4, 
+        'size'   : 128, 
+    };
+    
+    var levels = [
+        {
+            'activator r' : 100.0, 
+            'inhibitor r' : 200.0, 
+            'ss' : 0.05, 
+        }, 
+        {
+            'activator r' : 50.0, 
+            'inhibitor r' : 100.0, 
+            'ss' : 0.04, 
+        }, 
+        {
+            'activator r' : 10.0, 
+            'inhibitor r' : 20.0, 
+            'ss' : 0.03, 
+        }, 
+        {
+            'activator r' : 5.0, 
+            'inhibitor r' : 10.0, 
+            'ss' : 0.02, 
+        }, 
+        {
+            'activator r' : 2.0, 
+            'inhibitor r' : 4.0, 
+            'ss' : 0.01, 
+        }
+    ];
+    
     var data, patterns;
+    var stopped = true;
     
     var rtGrid;
     
@@ -357,21 +390,41 @@ $(document).ready(function() {
         renderer.setSize(window.innerWidth, window.innerHeight);
         container.appendChild(renderer.domElement);
         
-        data = new TuringData(renderer, SIZE);
-        patterns = [];
+        window.addEventListener('resize', onWindowResize, false);
+        container.addEventListener('click',  function() {
+            reset();
+        });
         
-        patterns.push(new TuringPattern(data, 100.0, 200.0, 100.0, 200.0, 1.0, 0.05));
-        patterns.push(new TuringPattern(data, 50.0, 100.0, 50.0, 100.0, 1.0, 0.04));
-        patterns.push(new TuringPattern(data, 10.0, 20.0, 10.0, 20.0, 1.0, 0.03));
+        initGUI();
+        reset();
+    }
+    
+    function reset()
+    {
+        stopped = true;
+        
+        pixels = null;
+        gl = null;
+        fb = null;
+        
+        data = new TuringData(renderer, options.size, options.levels);
+        patterns = [];
         
         // TODO: current blur uses radius / 9 so these last two patterns are too small to have 
         // variations between activator and inhibitor
-        patterns.push(new TuringPattern(data, 5.0, 10.0, 5.0, 10.0, 1.0, 0.02));
-        //patterns.push(new TuringPattern(data, 2.0, 4.0, 2.0, 4.0, 1.0, 0.01));
-        
-        window.addEventListener('resize', onWindowResize, false);
+        for (var i = 0; i < options.levels; ++i) {
+            var level = levels[i];
+            var pattern = new TuringPattern(data, 
+                                            level['activator r'], 
+                                            level['inhibitor r'], 
+                                            level['ss']);
+            
+            patterns.push(pattern);
+        }
         
         initGrid();
+        
+        stopped = false;
     }
     
     function initGrid()
@@ -380,6 +433,32 @@ $(document).ready(function() {
         rtGrid = data.genRenderTarget();
         
         data.renderTexture(dtGrid, rtGrid);
+    }
+    
+    function initGUI()
+    {
+        var gui = new dat.GUI();
+        gui.add(options, 'size', [ 16, 32, 64, 128, 256, 512, 1024 ]).onChange(reset);
+        gui.add(options, 'levels', 1, 4).step(1).onChange(reset);
+        
+        for (var i = 0; i < options.levels; ++i) {
+            var folder = gui.addFolder('Level ' + (i + 1));
+            var level  = levels[i];
+            
+            for (var key in level) {
+                if (level.hasOwnProperty(key)) {
+                    var c = folder.add(level, key, 0.0, 300.0);
+                    if (key === 'ss') {
+                        c.step(0.001).min(0.001).max(0.5);
+                    }
+                    
+                    c.onChange(function(value) {
+                        level[key] = value;
+                        reset();
+                    });
+                }
+            }
+        }
     }
     
     function onWindowResize()
@@ -393,13 +472,15 @@ $(document).ready(function() {
         
         requestAnimationFrame(animate);
         
-        debugTime && console.time('update');
-        update();
-        debugTime && console.endTime('update');
-        
-        debugTime && console.time('render');
-        render();
-        debugTime && console.endTime('render');
+        if (!stopped) {
+            debugTime && console.time('update');
+            update();
+            debugTime && console.endTime('update');
+            
+            debugTime && console.time('render');
+            render();
+            debugTime && console.endTime('render');
+        }
     }
     
     function update()
@@ -430,7 +511,7 @@ $(document).ready(function() {
         if (!gl) {
             gl = renderer.getContext();
             fb = gl.createFramebuffer();
-            pixels = new Uint8Array(SIZE * SIZE * 4);
+            pixels = new Uint8Array(options.size * options.size * 4);
         }
         
         if (!!gl) {
@@ -442,13 +523,13 @@ $(document).ready(function() {
                 // HACK: we're pickling a single float value in every 4 bytes 
                 // because webgl currently doesn't support reading gl.FLOAT 
                 // textures.
-                gl.readPixels(0, 0, SIZE, SIZE, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+                gl.readPixels(0, 0, options.size, options.size, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
                 
                 var max = -100, min = 100;
                 
-                for (var i = 0; i < SIZE; ++i) {
-                    for (var j = 0; j < SIZE; ++j) {
-                        var o = 4 * (i * SIZE + j);
+                for (var i = 0; i < options.size; ++i) {
+                    for (var j = 0; j < options.size; ++j) {
+                        var o = 4 * (i * options.size + j);
                         var x = pixels[o + 0];
                         var y = pixels[o + 1] / 255.0;
                         var z = pixels[o + 2] / 255.0;
