@@ -1,6 +1,23 @@
 /*! turing.js
  * 
  * Copyright (c) 2013 Travis Fischer
+ * 
+ * Based off of Jonathon McCabe's paper 'Cyclic Symmetric Multi-Scale Turing Patterns
+ * (http://www.jonathanmccabe.com/Cyclic_Symmetric_Multi-Scale_Turing_Patterns.pdf)
+ * 
+ * Resources:
+ *   * http://www.jonathanmccabe.com/Cyclic_Symmetric_Multi-Scale_Turing_Patterns.pdf
+ *   * http://www.wblut.com/2011/07/13/mccabeism-turning-noise-into-a-thing-of-beauty/
+ *   * http://softologyblog.wordpress.com/2011/07/05/multi-scale-turing-patterns/
+ * 
+ * TODO:
+ *   * switch to using ALPHA textures instead of RGBA
+ *   * optimize multi-pass blur diffusion
+ *   * look into replacing inefficient readPixels for grid normalization
+ *   * HUD with data.GUI
+ *      * SIZE
+ *      * toggle view individual layers
+ *      * multi-pass blur constant
  */
 
 /* vim: set tabstop=4 shiftwidth=4 softtabstop=4 expandtab: */
@@ -319,7 +336,7 @@ $(document).ready(function() {
     var container;
     var renderer;
     
-    var SIZE = 256;
+    var SIZE = 128;
     var data, patterns;
     
     var rtGrid;
