@@ -39,9 +39,16 @@ def processing(request, *args, **kwargs):
 
 @view()
 def test(request, *args, **kwargs):
-    return render_template(request, 'test.html', {
+    default = 'test'
+    experiment = kwargs.get('experiment', default)
+    if experiment is None:
+        experiment = default
+    
+    template = '%s.html' % experiment
+    
+    return render_template(request, template, {
         'page'  : 'test', 
-        'title' : 'Transitive Bullshit - Test', 
+        'title' : 'Transitive Bullshit - Lab - %s' % experiment, 
     })
 
 @view()
@@ -54,10 +61,4 @@ def article(request, *args, **kwargs):
         template = '%s.html' % article_id
         
         return render_template(request, template, {})
-    
-    print ""
-    print ""
-    print "NOT AJAX: %s, %s" % (ajax, article_id)
-    print ""
-    print ""
 

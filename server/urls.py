@@ -8,7 +8,7 @@ from django.core.exceptions     import ImproperlyConfigured
 
 urlpatterns = patterns('',
     # ------------------------------ INDEX -------------------------------------
-    # e.g., transitivebullshit.com
+    # ex.com
     url(r'^index$',                             'core.views.index'), 
     url(r'^index\.html?$',                      'core.views.index'), 
     url(r'^/?$',                                'core.views.index'), 
@@ -17,15 +17,15 @@ urlpatterns = patterns('',
     url(r'^mobile/index\.html?$',               'core.views.index'), 
     url(r'^mobile/?$',                          'core.views.index'), 
     
-    # e.g., transitivebullshit.com/processing
+    # ex.com/processing
     url(r'^processing\/?$',                     'core.views.processing'), 
     url(r'^mobile/processing\/?$',              'core.views.processing'), 
     
-    # e.g., transitivebullshit.com/test
-    url(r'^test\/?$',                           'core.views.test'), 
-    url(r'^mobile/test\/?$',                    'core.views.test'), 
+    # ex.com/test, ex.com/test/turing
+    url(r'^test\/?(?P<experiment>[\w-]{1,30})?$',        'core.views.test'), 
+    url(r'^mobile/test\/?(?P<experiment>[\w-]{1,30})?$', 'core.views.test'), 
     
-    # e.g., transitivebullshit.com/articles/about
+    # ex.com/articles/about
     url(r'^articles\/(?P<article>[\w-]{1,30})\.html?\/?$',  'core.views.article'), 
     url(r'^mobile/articles\/(?P<article>[\w-]{1,30})\.html?\/?$',  'core.views.article'), 
 )
