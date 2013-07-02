@@ -244,7 +244,7 @@ var TuringData = Class.extend(
     
     blur : function(rtSource, rtDest, radius)
     {
-        var max = radius / 9;
+        var max = radius / 3;
         
         // expensive multipass blur filter to simulate larger blur radii
         for (var i = 0; i < max; ++i) {
@@ -341,6 +341,8 @@ $(document).ready(function() {
         'size'   : 128, 
     };
     
+    // TODO: current blur uses radius / 9 so these last two patterns are too small to have 
+    // variations between activator and inhibitor
     var levels = [
         {
             'activator r' : 100.0, 
@@ -410,8 +412,6 @@ $(document).ready(function() {
         data = new TuringData(renderer, options.size, options.levels);
         patterns = [];
         
-        // TODO: current blur uses radius / 9 so these last two patterns are too small to have 
-        // variations between activator and inhibitor
         for (var i = 0; i < options.levels; ++i) {
             var level = levels[i];
             var pattern = new TuringPattern(data, 
@@ -515,7 +515,7 @@ $(document).ready(function() {
         }
         
         if (!!gl) {
-            // TODO: there has to be a more efficient way of doing this than via readPixels...
+            // TODO: optimize via shader reductions
             gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
             gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, data.rtTemp2.__webglTexture, 0);
             
