@@ -2,7 +2,8 @@
  * 
  * Copyright (c) 2013 Travis Fischer
  * 
- * http://www.generatorx.no/20060413/jonathan-mccabe/
+ * Animated GLSL visualization based off of Jonathan McCabe's Origami Butterfly.
+ * (http://www.generatorx.no/20060413/jonathan-mccabe/)
  */
 
 /* vim: set tabstop=4 shiftwidth=4 softtabstop=4 expandtab: */
@@ -67,7 +68,6 @@ $(document).ready(function() {
         var hsv_to_rgb = document.getElementById('shaderHSVToRGB').textContent;
         foldsTexture = genTexture();
         
-        // TODO
         var fold = 
             "uniform vec2 resolution;\n" + 
             "uniform sampler2D folds;\n" + 
@@ -75,13 +75,13 @@ $(document).ready(function() {
             "\n" + 
             hsv_to_rgb + 
             "\n" + 
-            "void main()	{\n" + 
+            "void main() {\n" + 
             "    vec2 uv = gl_FragCoord.xy / resolution.xy;\n" + 
             "    vec2 pos = vec2(0.0);\n" + 
             "    float sum = 0.0;\n" + 
             "\n" + 
             "    vec4 fold;\n" + 
-            "    vec2 f, u, x, UV;\n" + 
+            "    vec2 f, u, x, UV, UV2;\n" + 
             "    float w;\n" + 
             "\n";
         
@@ -117,8 +117,8 @@ $(document).ready(function() {
         });
         
         scene = new THREE.Scene();
-	    var mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), foldsShader);
-	    scene.add(mesh);
+        var mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), foldsShader);
+        scene.add(mesh);
         
         dirty   = true;
         stopped = false;

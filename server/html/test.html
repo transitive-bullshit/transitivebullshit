@@ -6,13 +6,10 @@
     <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/test.css">
 {% endblock styles %}
 
-{% block content %}
-{% endblock content %}
-
 {% block shaders %}
     <!-- pass through shaders -->
     <script id="vertexShader" type="x-shader/x-vertex">
-void main()	{
+void main() {
     gl_Position = vec4(position, 1.0);
 }
     </script>
@@ -22,7 +19,7 @@ uniform vec2 resolution;
 uniform float time;
 uniform sampler2D texture;
 
-void main()	{
+void main() {
     vec2 uv = gl_FragCoord.xy / resolution.xy;
 
     vec3 color = texture2D(texture, uv).xyz;
@@ -39,7 +36,7 @@ uniform float time;
 uniform sampler2D textureVelocity;
 uniform sampler2D texturePosition;
 
-void main()	{
+void main() {
     vec2 uv = gl_FragCoord.xy / resolution.xy;
 
     vec3 position = texture2D(texturePosition, uv).xyz;
@@ -76,7 +73,7 @@ float rand(vec2 co){
     return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
 }
 
-void main()	{
+void main() {
     vec2 uv = gl_FragCoord.xy / resolution.xy;
 
     // int x, y;

@@ -6,13 +6,10 @@
     <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/test.css">
 {% endblock styles %}
 
-{% block content %}
-{% endblock content %}
-
 {% block shaders %}
     <!-- pass through shaders -->
     <script id="vertexShader" type="x-shader/x-vertex">
-void main()	{
+void main() {
     gl_Position = vec4(position, 1.0);
 }
     </script>
@@ -21,7 +18,7 @@ void main()	{
 uniform vec2 resolution;
 uniform sampler2D texture;
 
-void main()	{
+void main() {
     vec2 uv = gl_FragCoord.xy / resolution.xy;
     vec3 color = texture2D(texture, uv).xyz;
     
@@ -34,7 +31,7 @@ void main()	{
 uniform sampler2D texture;
 uniform vec2 resolution;
 
-void main()	{
+void main() {
     float diff = 1.0 / resolution.x;
     
     vec2 uv = gl_FragCoord.xy / resolution.xy;
@@ -58,7 +55,7 @@ void main()	{
 uniform sampler2D texture;
 uniform vec2 resolution;
 
-void main()	{
+void main() {
     float diff = 1.0 / resolution.y;
     
     vec2 uv = gl_FragCoord.xy / resolution.xy;
@@ -84,7 +81,7 @@ uniform sampler2D source2;
 
 uniform vec2 resolution;
 
-void main()	{
+void main() {
     float diff = 1.0 / resolution.x;
     
     vec2 uv = gl_FragCoord.xy / resolution.xy;
@@ -106,7 +103,7 @@ uniform sampler2D source2;
 
 uniform vec2 resolution;
 
-void main()	{
+void main() {
     float diff = 1.0 / resolution.y;
     
     vec2 uv = gl_FragCoord.xy / resolution.xy;
@@ -128,7 +125,7 @@ uniform sampler2D source2;
 
 uniform vec2 resolution;
 
-void main()	{
+void main() {
     vec2 uv = gl_FragCoord.xy / resolution.xy;
     
     gl_FragColor = texture2D(source1, uv) + texture2D(source2, uv);
@@ -141,7 +138,7 @@ void main()	{
 
     uniform vec2 resolution;
 
-    void main()	{
+    void main() {
         vec2 uv = gl_FragCoord.xy / resolution.xy;
         
         float v = texture2D(source1, uv).r + texture2D(source2, uv).r;
@@ -189,7 +186,7 @@ uniform float p4SS;
 uniform float levels;
 uniform vec2 resolution;
 
-void main()	{
+void main() {
     vec2 uv = gl_FragCoord.xy / resolution.xy;
     
     float p0V = texture2D(p0Variation, uv).r;
@@ -251,7 +248,7 @@ uniform float p4SS;
 
 uniform vec2 resolution;
 
-void main()	{
+void main() {
     vec2 uv = gl_FragCoord.xy / resolution.xy;
     
     float val = p0SS * sign(texture2D(p0Activator, uv).r - texture2D(p0Inhibitor, uv).r);
@@ -265,7 +262,7 @@ void main()	{
 uniform vec2 resolution;
 uniform sampler2D source;
 
-void main()	{
+void main() {
     vec2 uv = gl_FragCoord.xy / resolution.xy;
     float v = texture2D(source, uv).r;
     
@@ -280,7 +277,7 @@ uniform sampler2D source;
 uniform float minimum;
 uniform float invRange;
 
-void main()	{
+void main() {
     vec2 uv = gl_FragCoord.xy / resolution.xy;
     float v = texture2D(source, uv).r;
     
