@@ -22,4 +22,5 @@ Articles:
 
 Client:
     * full article popup working with links and history
+    * better way of storing shaders / encapsulating individual experiments
 

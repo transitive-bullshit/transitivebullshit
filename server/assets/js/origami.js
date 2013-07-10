@@ -127,8 +127,9 @@ $(document).ready(function() {
     function genTexture()
     {
         var size = options.size;
-        foldsData = new Float32Array(size * size * 4);
-        foldsVel  = new Float32Array(size * size * 4);
+        var length = size * size * 4;
+        foldsData = new Float32Array(length);
+        foldsVel  = new Float32Array(length);
         var velAmount = 0.001;
         
         for (var i = 0; i < size; ++i) {

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+        
+{% block styles %}
+    {{ block.super }}
+    
+    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/test.css">
+{% endblock styles %}
+
+{% block shaders %}
+    <!-- pass through shaders -->
+    <script id="vertexShader" type="x-shader/x-vertex">
+void main() {
+    gl_Position = vec4(position, 1.0);
+}
+    </script>
+
+    <script id="fragmentShader" type="x-shader/x-fragment">
+uniform vec2 resolution;
+uniform sampler2D texture;
+
+void main() {
+    vec2 uv = gl_FragCoord.xy / resolution.xy;
+    vec3 color = texture2D(texture, uv).xyz;
+    
+    gl_FragColor = vec4(color, 1.0);
+}
+    </script>
+    <!-- end pass through shaders -->
+{% endblock shaders %}
+
+{% block scripts %}
+    {{ block.super }}
+    
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/Detector.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/processing-1.4.1.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/three/three.min.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/tween.min.js"></script>
+    
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/dat.gui/dat.gui.min.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/dat.gui/dat.color.min.js"></script>
+    
+    <script src="{{ STATIC_ASSET_BASE }}js/utils.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/processing_three.js"></script>
+{% endblock scripts %}
+
