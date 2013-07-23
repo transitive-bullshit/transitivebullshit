@@ -39,7 +39,7 @@ def processing(request, *args, **kwargs):
 
 @view()
 def test(request, *args, **kwargs):
-    default = 'test'
+    default = 'turing'
     experiment = kwargs.get('experiment', default)
     if experiment is None:
         experiment = default

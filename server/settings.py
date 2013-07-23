@@ -88,7 +88,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '3whjm6l=^ut&u=2n@f!%#&ds^1s!dqrhb9vw2*&x_@g^rhsiub'
+SECRET_KEY = '3whjm6l=^ut&f=2@*8!%#&ds^1s!dqyhb9vw%*&x_@g^rhsiub'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -108,15 +108,19 @@ ROOT_URLCONF = 'urls'
 
 TEMPLATE_ROOT = os.path.join(PROJ_ROOT, "html")
 ARTICLE_ROOT  = os.path.join(PROJ_ROOT, "articles")
+LAB_ROOT      = os.path.join(STATIC_DOC_ROOT, "lab")
 TEMPLATE_FILE = os.path.join(TEMPLATE_ROOT, "handlebars.generated.html")
 
-TEMPLATE_DIRS = (
+TEMPLATE_DIRS = [
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     TEMPLATE_ROOT, 
     ARTICLE_ROOT, 
-)
+]
+TEMPLATE_DIRS.extend(os.path.join(LAB_ROOT, d) for d in os.listdir(LAB_ROOT) if os.path.isdir(os.path.join(LAB_ROOT, d)))
+
+TEMPLATE_DIRS = tuple(TEMPLATE_DIRS)
 
 # A tuple of strings representing allowed prefixes for the {% ssi %} template 
 # tag. This is a security measure, so that template authors can't access files 

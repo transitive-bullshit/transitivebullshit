@@ -1,20 +1,12 @@
-{% extends "base.html" %}
-        
-{% block styles %}
-    {{ block.super }}
-    
-    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/test.css">
-{% endblock styles %}
 
-{% block shaders %}
-    <!-- pass through shaders -->
-    <script id="vertexShader" type="x-shader/x-vertex">
+<!-- pass through shaders -->
+<script id="vertexShader" type="x-shader/x-vertex">
 void main() {
     gl_Position = vec4(position, 1.0);
 }
-    </script>
+</script>
 
-    <script id="fragmentShader" type="x-shader/x-fragment">
+<script id="fragmentShader" type="x-shader/x-fragment">
 uniform vec2 resolution;
 uniform sampler2D texture;
 
@@ -24,10 +16,10 @@ void main() {
     
     gl_FragColor = vec4(color, 1.0);
 }
-    </script>
-    <!-- end pass through shaders -->
+</script>
+<!-- end pass through shaders -->
 
-    <script id="fragmentShaderBlurH" type="x-shader/x-fragment">
+<script id="fragmentShaderBlurH" type="x-shader/x-fragment">
 uniform sampler2D texture;
 uniform vec2 resolution;
 
@@ -49,9 +41,9 @@ void main() {
     
     gl_FragColor = vec4(sum);
 }
-    </script>
-    
-    <script id="fragmentShaderBlurV" type="x-shader/x-fragment">
+</script>
+
+<script id="fragmentShaderBlurV" type="x-shader/x-fragment">
 uniform sampler2D texture;
 uniform vec2 resolution;
 
@@ -73,9 +65,9 @@ void main() {
     
     gl_FragColor = vec4(sum);
 }
-    </script>
-    
-    <script id="fragmentShaderCompH" type="x-shader/x-fragment">
+</script>
+
+<script id="fragmentShaderCompH" type="x-shader/x-fragment">
 uniform sampler2D source1;
 uniform sampler2D source2;
 
@@ -95,9 +87,9 @@ void main() {
     sum /= 3.0;
     gl_FragColor = vec4(sum);
 }
-    </script>
-    
-    <script id="fragmentShaderCompV" type="x-shader/x-fragment">
+</script>
+
+<script id="fragmentShaderCompV" type="x-shader/x-fragment">
 uniform sampler2D source1;
 uniform sampler2D source2;
 
@@ -117,9 +109,9 @@ void main() {
     sum /= 3.0;
     gl_FragColor = vec4(sum);
 }
-    </script>
-    
-    <script id="fragmentShaderCompM" type="x-shader/x-fragment">
+</script>
+
+<script id="fragmentShaderCompM" type="x-shader/x-fragment">
 uniform sampler2D source1;
 uniform sampler2D source2;
 
@@ -130,9 +122,9 @@ void main() {
     
     gl_FragColor = texture2D(source1, uv) + texture2D(source2, uv);
 }
-    </script>
-    
-    <script id="fragmentShaderCompX" type="x-shader/x-fragment">
+</script>
+
+<script id="fragmentShaderCompX" type="x-shader/x-fragment">
     uniform sampler2D source1;
     uniform sampler2D source2;
 
@@ -156,9 +148,9 @@ void main() {
         
         gl_FragColor = oo;
     }
-    </script>
-    
-    <script id="fragmentShaderUpdateGrid" type="x-shader/x-fragment">
+</script>
+
+<script id="fragmentShaderUpdateGrid" type="x-shader/x-fragment">
 uniform sampler2D p0Variation;
 uniform sampler2D p1Variation;
 uniform sampler2D p2Variation;
@@ -218,10 +210,10 @@ void main() {
     
     gl_FragColor = vec4(val);
 }
-    </script>
-    
-    <!--
-    <script id="fragmentShaderUpdateGrid" type="x-shader/x-fragment">
+</script>
+
+<!--
+<script id="fragmentShaderUpdateGrid" type="x-shader/x-fragment">
 uniform sampler2D p0Variation;
 uniform sampler2D p1Variation;
 uniform sampler2D p2Variation;
@@ -255,10 +247,10 @@ void main() {
     
     gl_FragColor = vec4(val);
 }
-    </script>
-    -->
-    
-    <script id="fragmentShaderRenderGrid" type="x-shader/x-fragment">
+</script>
+-->
+
+<script id="fragmentShaderRenderGrid" type="x-shader/x-fragment">
 uniform vec2 resolution;
 uniform sampler2D source;
 
@@ -268,9 +260,9 @@ void main() {
     
     gl_FragColor = vec4(v, v, v, 1.0);
 }
-    </script>
-    
-    <script id="fragmentShaderNormalizeGrid" type="x-shader/x-fragment">
+</script>
+
+<script id="fragmentShaderNormalizeGrid" type="x-shader/x-fragment">
 uniform vec2 resolution;
 uniform sampler2D source;
 
@@ -283,22 +275,7 @@ void main() {
     
     v = (v - minimum) * invRange - 1.0;
     
-    gl_FragColor = vec4(v);
+    gl_FragColor = vec4(v, v, v, 1.0);
 }
-    </script>
-{% endblock shaders %}
-
-{% block scripts %}
-    {{ block.super }}
-    
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/Detector.js"></script>
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/three/three.min.js"></script>
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/tween.min.js"></script>
-    
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/dat.gui/dat.gui.min.js"></script>
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/dat.gui/dat.color.min.js"></script>
-    
-    <script src="{{ STATIC_ASSET_BASE }}js/utils.js"></script>
-    <script src="{{ STATIC_ASSET_BASE }}js/turing.js"></script>
-{% endblock scripts %}
+</script>
 

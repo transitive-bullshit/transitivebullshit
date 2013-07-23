@@ -24,3 +24,5 @@ Client:
     * full article popup working with links and history
     * better way of storing shaders / encapsulating individual experiments
 
+visualization of moon % people looking back at you and distribution in the world
+

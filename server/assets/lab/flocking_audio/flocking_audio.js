@@ -1,4 +1,4 @@
-/*! test.js
+/*! flocking_audio.js
  * 
  * Copyright (c) 2013 Travis Fischer
  */

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+        
+{% block styles %}
+    {{ block.super }}
+    
+    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/test.css">
+{% endblock styles %}
+
+{% block shaders %}
+    {% include "origami-shaders.html" %}
+{% endblock shaders %}
+
+{% block scripts %}
+    {{ block.super }}
+    
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/Detector.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/three/three.min.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/tween.min.js"></script>
+    
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/dat.gui/dat.gui.min.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/dat.gui/dat.color.min.js"></script>
+    
+    <script src="{{ STATIC_ASSET_BASE }}js/utils.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}lab/origami/origami.js"></script>
+{% endblock scripts %}
+

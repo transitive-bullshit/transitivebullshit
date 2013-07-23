@@ -1,4 +1,4 @@
-/*! flocking2.js
+/*! flocking.js
  * 
  * Copyright (c) 2013 Travis Fischer
  */

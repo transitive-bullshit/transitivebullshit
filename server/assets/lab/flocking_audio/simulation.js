@@ -1,6 +1,9 @@
+/*! simulation.js
+ * 
+ * Copyright (c) 2013 Travis Fischer
+ */
 
-function SimulatorRenderer(WIDTH, renderer)
-{
+function SimulatorRenderer(WIDTH, renderer) {
 	WIDTH = WIDTH || 4;
 	var camera = new THREE.Camera();
 	camera.position.z = 1;
@@ -8,13 +11,13 @@ function SimulatorRenderer(WIDTH, renderer)
 	// Init RTT stuff
 	gl = renderer.getContext();
 
-	if (!gl.getExtension( "OES_texture_float" )) {
-		alert( "No OES_texture_float support for float textures!" );
+	if(!gl.getExtension("OES_texture_float")) {
+		alert("No OES_texture_float support for float textures!");
 		return;
 	}
 
-	if (gl.getParameter(gl.MAX_VERTEX_TEXTURE_IMAGE_UNITS) == 0) {
-		alert( "No support for vertex shader textures!" );
+	if(gl.getParameter(gl.MAX_VERTEX_TEXTURE_IMAGE_UNITS) == 0) {
+		alert("No support for vertex shader textures!");
 		return;
 	}
 
@@ -27,40 +30,41 @@ function SimulatorRenderer(WIDTH, renderer)
 		// Inputs
 	};
 
-	var material = new THREE.ShaderMaterial( {
+	var material = new THREE.ShaderMaterial({
 		uniforms: uniforms,
-		vertexShader: document.getElementById( 'vertexShader' ).textContent,
-		fragmentShader: document.getElementById( 'fragmentShader' ).textContent
-	} );
+		vertexShader: document.getElementById('vertexShader').textContent,
+		fragmentShader: document.getElementById('fragmentShader').textContent
 
-	var mesh = new THREE.Mesh( new THREE.PlaneGeometry( 2, 2 ), material );
+	});
 
-	var positionShader = new THREE.ShaderMaterial( {
+	var mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
+
+	var positionShader = new THREE.ShaderMaterial({
 		uniforms: {
 			time: { type: "f", value: 1.0 },
 			resolution: { type: "v2", value: new THREE.Vector2(WIDTH, WIDTH) },
 			texturePosition: { type: "t", value: null },
 			textureVelocity: { type: "t", value: null },
 		},
-		vertexShader: document.getElementById( 'vertexShader' ).textContent,
-		fragmentShader: document.getElementById( 'fragmentShaderPosition' ).textContent
-	} );
+		vertexShader: document.getElementById('vertexShader').textContent,
+		fragmentShader: document.getElementById('fragmentShaderPosition').textContent
+	});
 
-	var velocityShader = new THREE.ShaderMaterial( {
+	var velocityShader = new THREE.ShaderMaterial({
 		uniforms: {
 			time: { type: "f", value: 1.0 },
 			resolution: { type: "v2", value: new THREE.Vector2(WIDTH, WIDTH) },
 			texturePosition: { type: "t", value: null },
 			textureVelocity: { type: "t", value: null },
-			testing: { type: "f", value: 1.0 },
+			testing: { type: "f", value: 0.0 },
 			separationDistance: { type: "f", value: 1.0 },
 			alignmentDistance: { type: "f", value: 1.0 },
 			cohesionDistance: { type: "f", value: 1.0 },
 			freedomFactor: { type: "f", value: 1.0 },
 		},
-		vertexShader: document.getElementById( 'vertexShader' ).textContent,
-		fragmentShader: document.getElementById( 'fragmentShaderVelocity' ).textContent
-	} );
+		vertexShader: document.getElementById('vertexShader').textContent,
+		fragmentShader: document.getElementById('fragmentShaderVelocity').textContent
+	});
 
 	this.velocityUniforms = velocityShader.uniforms;
 

@@ -1,20 +1,12 @@
-{% extends "base.html" %}
-        
-{% block styles %}
-    {{ block.super }}
-    
-    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/test.css">
-{% endblock styles %}
 
-{% block shaders %}
-    <!-- pass through shaders -->
-    <script id="vertexShader" type="x-shader/x-vertex">
+<!-- pass through shaders -->
+<script id="vertexShader" type="x-shader/x-vertex">
 void main() {
     gl_Position = vec4(position, 1.0);
 }
-    </script>
+</script>
 
-    <script id="fragmentShader" type="x-shader/x-fragment">
+<script id="fragmentShader" type="x-shader/x-fragment">
 uniform vec2 resolution;
 uniform sampler2D texture;
 
@@ -24,10 +16,10 @@ void main() {
     
     gl_FragColor = vec4(color, 1.0);
 }
-    </script>
-    <!-- end pass through shaders -->
-    
-    <script id="shaderHSVToRGB" type="x-shader/x-fragment">
+</script>
+<!-- end pass through shaders -->
+
+<script id="shaderHSVToRGB" type="x-shader/x-fragment">
 /*
  * GLSL HSV to RGB+A conversion. Useful for many effects and shader debugging.
  *
@@ -63,20 +55,5 @@ vec4 hsv_to_rgb(float h, float s, float v, float a)
  
     return color;
 }
-    </script>
-{% endblock shaders %}
-
-{% block scripts %}
-    {{ block.super }}
-    
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/Detector.js"></script>
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/three/three.min.js"></script>
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/tween.min.js"></script>
-    
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/dat.gui/dat.gui.min.js"></script>
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/dat.gui/dat.color.min.js"></script>
-    
-    <script src="{{ STATIC_ASSET_BASE }}js/utils.js"></script>
-    <script src="{{ STATIC_ASSET_BASE }}js/origami.js"></script>
-{% endblock scripts %}
+</script>
 

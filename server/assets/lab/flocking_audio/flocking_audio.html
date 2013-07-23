@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+        
+{% block styles %}
+    {{ block.super }}
+    
+    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/test.css">
+{% endblock styles %}
+
+{% block shaders %}
+    {% include "flocking_audio-shaders.html" %}
+{% endblock shaders %}
+
+{% block scripts %}
+    {{ block.super }}
+    
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/dancer/dancer.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/Detector.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/three/three.min.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}js/libs/tween.min.js"></script>
+    
+    <script src="{{ STATIC_ASSET_BASE }}js/utils.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}lab/flocking_audio/simulation.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}lab/flocking_audio/flocking.js"></script>
+    <script src="{{ STATIC_ASSET_BASE }}lab/flocking_audio/flocking_audio.js"></script>
+{% endblock scripts %}
+
