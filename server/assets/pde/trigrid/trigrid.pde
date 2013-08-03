@@ -95,11 +95,11 @@ void draw() {
 
 void mouseClicked() {
     // determine which triangle in the grid was clicked
-    int col = floor(mouseX / _horizontalSize);
-    int row = floor(mouseY / _verticalSize);
+    int col = floor(pmouseX / _horizontalSize);
+    int row = floor(pmouseY / _verticalSize);
     
     Triangle active = _grid[row * _gridWidth + col];
-    PVector pt = new PVector(mouseX, mouseY);
+    PVector pt = new PVector(pmouseX, pmouseY);
     
     // only two cases w.r.t. if you click below the triangle whose aabb 
     // corresponds to grid location at the given row and column; either 
@@ -111,8 +111,10 @@ void mouseClicked() {
     }
     
     // cycle the color of the clicked triangle and redraw
-    active.cycleState();
-    redraw();
+    if (active != null) {
+        active.cycleState();
+        redraw();
+    }
 }
 
 // represents one triangle in the grid

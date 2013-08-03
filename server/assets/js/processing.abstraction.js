@@ -17475,7 +17475,14 @@
 
       p.pmouseX = p.mouseX;
       p.pmouseY = p.mouseY;
-
+      
+      if (typeof($) !== 'undefined') {
+          var $element = $(element);
+          var offset = $element.offset();
+          
+          return { 'X' : offset.left, 'Y' : offset.top };
+      }
+      
       // Find element offset
       if (element.offsetParent) {
         do {
