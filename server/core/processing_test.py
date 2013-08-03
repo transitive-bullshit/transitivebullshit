@@ -67,9 +67,9 @@ def get_sketches():
             'desc'  : "Combining the gravity sketch's movement with the intersection sketch's visualization.", 
         }, 
         {
-            'name'  : 'lines', 
-            'hname' : 'lines', 
-            'desc'  : "TODO TEST", 
+            'name'  : 'trigrid', 
+            'hname' : 'TriGrid', 
+            'desc'  : "Simple sketch of a triangular grid.", 
         }, 
     ]
 
