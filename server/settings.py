@@ -2,7 +2,7 @@
 
 import os, utils
 
-DEBUG           = (not utils.is_ec2())
+DEBUG           = True #(not utils.is_ec2())
 TEMPLATE_DEBUG  = DEBUG
 PROJ_ROOT       = os.path.abspath(os.path.dirname(__file__))
 ASSET_VERSION   = 0
