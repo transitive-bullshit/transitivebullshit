@@ -138,6 +138,10 @@ body {
   background: url(/assets/img/processing/trema0.png) no-repeat;
   background-size: 100% 100%;
 }
+#preview-sketch-trigrid {
+  background: url(/assets/img/processing/trigrid0.png) no-repeat;
+  background-size: 100% 100%;
+}
 /* **************************************************************************
                                   SKETCH PAGE
    ************************************************************************** */
