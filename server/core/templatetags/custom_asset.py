@@ -67,7 +67,7 @@ class GlobalAssetLibrary(object):
         if asset_type not in ASSET_TYPES:
             raise Exception("unknown asset type '%s' for asset '%s'" % (asset_type, asset_path))
         
-        if not utils.is_ec2():
+        if settings.DEBUG:
             return self.get_include(asset_path, asset_type)
         elif asset_type is None:
             asset_type = asset_path
@@ -153,8 +153,8 @@ class CustomAssetNode(ACustomNode):
             print "%s error (%s): %s" % (self, self._asset_path, e)
             utils.printException()
             
-            if utils.is_ec2():
-                return ''
-            else:
+            if settings.DEBUG:
                 raise
+            else:
+                return ''
 
