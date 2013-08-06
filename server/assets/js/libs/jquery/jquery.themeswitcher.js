@@ -146,7 +146,7 @@ $.fn.themeswitcher = function(settings){
         }   
     )
     .find('.jquery-ui-themeswitcher-icon').css({
-        float: 'right',
+        'float': 'right',
         width: '16px',
         height: '16px',
         background: 'url('+options.imageLocation+'icon_color_arrow.gif) 50% 50% no-repeat'
@@ -154,7 +154,7 @@ $.fn.themeswitcher = function(settings){
     //pane css
     switcherpane.css({
         position: 'absolute',
-        float: 'left',
+        'float': 'left',
         fontFamily: 'Trebuchet MS, Verdana, sans-serif',
         fontSize: '12px',
         background: '#000',
@@ -200,7 +200,7 @@ $.fn.themeswitcher = function(settings){
         '-moz-border-radius': '4px',
         clear: 'left',
         textAlign:'center',
-        float: 'left'
+        'float': 'left'
     }).end()
     .find('a').css({
         color: '#aaa',
@@ -216,7 +216,7 @@ $.fn.themeswitcher = function(settings){
         margin: '0 2px'
     }).end()
     .find('.themeName').css({
-        float: 'left',
+        'float': 'left',
         margin: '3px 0',
         display:'block',
         width:"100%"

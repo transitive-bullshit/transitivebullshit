@@ -1,17 +1,19 @@
 {% extends "base.html" %}
+{% load custom_tags %}
         
 {% block styles %}
     {{ block.super }}
     
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Droid+Sans'>
-    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}fonts/ss-social-circle/ss-social-circle.css">
-    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}fonts/transitivebullshit/transitivebullshit.css">
+    {% custom_asset "http://fonts.googleapis.com/css?family=Droid+Sans" %}
+    {% custom_asset "fonts/ss-social-circle/ss-social-circle.css" %}
+    {% custom_asset "fonts/transitivebullshit/transitivebullshit.css" %}
+    {% custom_asset "css/libs/isotope.css" %}
+    {% custom_asset "css/libs/prism.css" %}
+    {% custom_asset "css/libs/jquery/jquery.fancybox.css" %}
+    {% custom_asset "css/blur.css" %}
+    {% custom_asset "css/index.css" %}
     
-    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/libs/isotope.css">
-    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/libs/prism.css">
-    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/libs/jquery/jquery.fancybox.css">
-    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/blur.css">
-    <link rel="stylesheet" href="{{ STATIC_ASSET_BASE }}css/index.css">
+    {% custom_asset css %}
 {% endblock styles %}
 
 {% block content %}
@@ -79,22 +81,14 @@
 {% block scripts %}
     {{ block.super }}
     
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/jquery/jquery.isotope.min.js"></script>
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/jquery/jquery.fancybox.js"></script>
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/prism.js"></script>
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/processing-1.4.1.js"></script>
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/ss-social.js"></script>
-    <script src="{{ STATIC_ASSET_BASE }}js/libs/jquery/jquery-ui-1.10.3.custom.min.js"></script>
-    <script src="{{ STATIC_ASSET_BASE }}js/index.js"></script>
+    {% custom_asset "js/libs/jquery/jquery.isotope.min.js" %}
+    {% custom_asset "js/libs/jquery/jquery.fancybox.js" %}
+    {% custom_asset "js/libs/prism.js" %}
+    {% custom_asset "js/libs/processing-1.4.1.js" %}
+    {% custom_asset "js/libs/ss-social.js" %}
+    {% custom_asset "js/libs/jquery/jquery-ui-1.10.3.custom.min.js" %}
+    {% custom_asset "js/index.js" %}
     
-    <script>
-        /*var disqus_shortname = 'transitivebullshit';
-        
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();*/
-    </script>
+    {% custom_asset js %}
 {% endblock scripts %}
 

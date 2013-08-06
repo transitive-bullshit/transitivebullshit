@@ -1,3 +1,4 @@
+{% load custom_tags %}
 <!doctype html>
 
 <html lang="en">
@@ -29,8 +30,8 @@
         {% endblock head %}
         
         {% block styles %}
-            <link rel="stylesheet"      href="{{ STATIC_ASSET_BASE }}css/libs/h5bp.css">
-            <link rel="stylesheet"      href="{{ STATIC_ASSET_BASE }}css/styles.css">
+            {% custom_asset "css/libs/h5bp.css" %}
+            {% custom_asset "css/styles.css" %}
         {% endblock styles %}
         
         {% block post_head %}

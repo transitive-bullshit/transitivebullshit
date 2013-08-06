@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'transitivebullshit';
-  src: url('transitivebullshit.eot?486716');
-  src: url('transitivebullshit.eot?486716#iefix') format('embedded-opentype'),
-       url('transitivebullshit.woff?486716') format('woff'),
-       url('transitivebullshit.ttf?486716') format('truetype'),
-       url('transitivebullshit.svg?486716#transitivebullshit') format('svg');
+  src: url('/assets/fonts/transitivebullshit/transitivebullshit.eot?486716');
+  src: url('/assets/fonts/transitivebullshit/transitivebullshit.eot?486716#iefix') format('embedded-opentype'),
+       url('/assets/fonts/transitivebullshit/transitivebullshit.woff?486716') format('woff'),
+       url('/assets/fonts/transitivebullshit/transitivebullshit.ttf?486716') format('truetype'),
+       url('/assets/fonts/transitivebullshit/transitivebullshit.svg?486716#transitivebullshit') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,7 +14,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'transitivebullshit';
-    src: url('transitivebullshit.svg?486716#transitivebullshit') format('svg');
+    src: url('/assets/fonts/transitivebullshit/transitivebullshit.svg?486716#transitivebullshit') format('svg');
   }
 }
 */
