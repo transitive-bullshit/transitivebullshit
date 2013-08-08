@@ -66,10 +66,13 @@ def get_sketches():
             'hname' : 'Intersection2', 
             'desc'  : "Combining the gravity sketch's movement with the intersection sketch's visualization.", 
         }, 
+    ]
+    
+    '''
         {
             'name'  : 'trigrid', 
             'hname' : 'TriGrid', 
             'desc'  : "Simple sketch of a triangular grid.", 
         }, 
-    ]
+    '''
 
