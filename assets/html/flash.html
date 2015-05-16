@@ -1,0 +1,28 @@
+<div class="flash-container">
+  <!-- Subscribe to success flash messages -->
+  <div flash-alert="success">
+    <div ng-if="flash.show" class="flash-alert flash-alert-success clearfix">
+      <span class="icon ion-checkmark-circled"></span>
+      <span class="alert-message" ng-bind="flash.message"></span>
+      <a href class="flash-close ion-close-round" ng-click="hide()"></a>
+    </div>
+  </div>
+
+  <!-- Subscribe to error flash messages -->
+  <div flash-alert="error">
+    <div ng-if="flash.show" class="flash-alert flash-alert-error clearfix">
+      <span class="icon ion-alert-circled"></span>
+      <span class="alert-message" ng-bind="flash.message"></span>
+      <a href class="flash-close ion-close-round" ng-click="hide()"></a>
+    </div>
+  </div>
+
+  <!-- Subscribe to warn flash messages -->
+  <div flash-alert="warn">
+    <div ng-if="flash.show" class="flash-alert flash-alert-warn clearfix">
+      <span class="icon ion-alert"></span>
+      <span class="alert-message" ng-bind="flash.message"></span>
+      <a href class="flash-close ion-close-round" ng-click="hide()"></a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="cms" layout-fill layout="row">
+  <md-sidenav md-is-locked-open="$mdMedia('(min-width: 850px)')" class="md-whiteframe-z2" md-component-id="left">
+    <md-toolbar class="logo" layout="row" layout-align="start center">
+      <img class="sesh-logo" src="/assets/img/sesh-logo-white.png" /><span>SESH</span>
+    </md-toolbar>
+
+    <md-list layout="column">
+      <md-item ng-repeat="item in nav.items">
+        <md-button layout="row" layout-align="start center" ng-click="selectNavItem($index)" ng-class="{ selected: $index === nav.selected }">
+          <span class="icon" ng-class="{{item.icon}}"></span> {{item.name}}
+        </md-button>
+      </md-item>
+    </md-list>
+  </md-sidenav>
+
+  <div layout="column" flex>
+    <md-toolbar class="header" layout="row" layout-align="start center">
+      <md-button class="menu" hide-gt-md ng-click="toggleNav()" aria-label="Toggle Nav">
+        <span class="nav-icon ion-navicon-round"></span>
+      </md-button>
+
+      <h2 ng-if="nav.titleHierarchy">{{nav.title}}<span ng-if="nav.selectedTitle"><span class="nav-delimiter ion-ios-arrow-forward"></span>{{nav.selectedTitle}}</span></h2>
+      <h2 ng-if="!nav.titleHierarchy">{{nav.selectedTitle || nav.title}}</h2>
+    </md-toolbar>
+
+    <md-content flex>
+      <div class="content" layout="column" layout-align="start center" ui-view></div>
+    </md-content>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+@import url('//fonts.googleapis.com/css?family=Oxygen:400,700');
+/*! flash.less */
+/*! elements.less
+ *
+ * Uses elements derived from LESS Elements 0.9 by Dmitry Fadeyev
+ * (http://lesselements.com)
+ *
+ * NOTE: the css version of this file is auto-generated, so only edit the original
+ * less version if you don't want your changes to be overwritten.
+ */
+.unselectable {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none !important;
+}
+/*! definitions.less */
+.flash-container {
+  font-family: 'Oxygen' "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 5000;
+}
+.flash-container .flash-alert {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  color: #fff;
+  min-height: 54px;
+  line-height: 54px;
+  padding: 0 2em;
+  font-size: 1.2em;
+}
+.flash-container .flash-alert .flash-close {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none !important;
+  display: block;
+  position: relative;
+  top: 2px;
+  float: right;
+  color: #fff;
+  padding: 0 0.7em;
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  -moz-transition: -moz-transform 0.2s ease-out;
+  -o-transition: -o-transform 0.2s ease-out;
+  transition: transform 0.2s ease-out;
+}
+.flash-container .flash-alert .flash-close:hover {
+  -webkit-transform: scale(1.4);
+  -moz-transform: scale(1.4);
+  -o-transform: scale(1.4);
+  -ms-transform: scale(1.4);
+  transform: scale(1.4);
+}
+.flash-container .flash-alert .icon {
+  display: inline-block;
+  margin-right: 1.6em;
+  -webkit-transform: scale(1.8);
+  -moz-transform: scale(1.8);
+  -o-transform: scale(1.8);
+  -ms-transform: scale(1.8);
+  transform: scale(1.8);
+}
+.flash-container .flash-alert-success {
+  background: #7ec646;
+}
+.flash-container .flash-alert-error {
+  background: #c4392d;
+}
+.flash-container .flash-alert-warn {
+  background: #e0d14f;
+}

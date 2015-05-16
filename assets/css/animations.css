@@ -1,0 +1,44 @@
+/* **************************************************************************
+                                   ANIMATIONS
+   ************************************************************************** */
+/*! elements.less
+ *
+ * Uses elements derived from LESS Elements 0.9 by Dmitry Fadeyev
+ * (http://lesselements.com)
+ *
+ * NOTE: the css version of this file is auto-generated, so only edit the original
+ * less version if you don't want your changes to be overwritten.
+ */
+.unselectable {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none !important;
+}
+.flash-alert {
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.flash-alert.ng-enter,
+.flash-alert.ng-leave.ng-leave-active {
+  opacity: 0.5;
+  -webkit-transform: translate(0, -100%);
+  -moz-transform: translate(0, -100%);
+  -o-transform: translate(0, -100%);
+  -ms-transform: translate(0, -100%);
+  transform: translate(0, -100%);
+}
+.flash-alert.ng-leave,
+.flash-alert.ng-enter.ng-enter-active {
+  opacity: 1;
+  -webkit-transform: translate(0, 0);
+  -moz-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  transform: translate(0, 0);
+}

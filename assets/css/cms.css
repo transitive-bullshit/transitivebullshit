@@ -1,0 +1,316 @@
+@import url('//fonts.googleapis.com/css?family=Oxygen:400,700');
+/*! cms.less */
+/*! elements.less
+ *
+ * Uses elements derived from LESS Elements 0.9 by Dmitry Fadeyev
+ * (http://lesselements.com)
+ *
+ * NOTE: the css version of this file is auto-generated, so only edit the original
+ * less version if you don't want your changes to be overwritten.
+ */
+.unselectable {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none !important;
+}
+/*! definitions.less */
+html {
+  font-size: 50%;
+}
+body {
+  background: #eeeeee;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+h2,
+.h2 {
+  font-size: 24px;
+}
+h3,
+.h3 {
+  font-size: 20px;
+}
+.blur-layer {
+  -webkit-transition: -webkit-filter 400ms ease-out;
+  transition: -webkit-filter 400ms ease-out;
+  -webkit-filter: blur(0px);
+}
+.blurred {
+  -webkit-transition: -webkit-filter 1200ms ease-out;
+  transition: -webkit-filter 1200ms ease-out;
+  -webkit-filter: blur(16px);
+}
+.no-text-transform {
+  text-transform: none !important;
+}
+.cms {
+  font-family: 'Oxygen' "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+}
+.cms .no-padding {
+  padding: 0 !important;
+}
+.cms .no-padding-top {
+  padding-top: 0 !important;
+}
+.cms .no-padding-right {
+  padding-right: 0 !important;
+}
+.cms .no-padding-bottom {
+  padding-bottom: 0 !important;
+}
+.cms .no-padding-left {
+  padding-left: 0 !important;
+}
+.cms .no-margin {
+  margin: 0 !important;
+}
+.cms .no-margin-top {
+  margin-top: 0 !important;
+}
+.cms .no-margin-right {
+  margin-right: 0 !important;
+}
+.cms .no-margin-bottom {
+  margin-bottom: 0 !important;
+}
+.cms .no-margin-left {
+  margin-left: 0 !important;
+}
+.cms h2,
+.cms h3 {
+  color: #42A5F5;
+}
+.cms h3.title {
+  color: #000;
+}
+.cms ol,
+.cms ul {
+  margin-bottom: 0;
+}
+.cms .md-card-header h2,
+.cms md-toolbar h2,
+.cms .md-card-header h3,
+.cms md-toolbar h3 {
+  color: #fff;
+}
+.cms button {
+  height: auto;
+}
+.cms .cms-content {
+  max-width: 600px;
+  padding: 2em 0 0;
+}
+.cms .cms-content md-card {
+  width: 100%;
+  margin: 0 auto 2em;
+}
+.cms .content {
+  margin: 0 auto;
+}
+.cms sn-cms-header {
+  width: 100%;
+}
+.cms sn-cms-header md-card-content {
+  overflow: hidden;
+  -webkit-transition: max-height 0.3s ease-out;
+  -moz-transition: max-height 0.3s ease-out;
+  -o-transition: max-height 0.3s ease-out;
+  transition: max-height 0.3s ease-out;
+}
+.cms sn-cms-header md-card-content.ng-enter,
+.cms sn-cms-header md-card-content.ng-leave.ng-leave-active {
+  max-height: 0;
+}
+.cms sn-cms-header md-card-content.ng-leave,
+.cms sn-cms-header md-card-content.ng-enter.ng-enter-active {
+  max-height: 20em;
+}
+.cms md-card {
+  background: #fff;
+}
+.cms md-card h3 {
+  margin-bottom: 0.5em;
+}
+.cms md-card p {
+  margin: 0 0 1em 0;
+}
+.cms md-card .card-title {
+  margin: 1em 0 0;
+}
+.cms md-card .md-card-header {
+  position: relative;
+  color: #fff;
+  width: 100%;
+  height: 10em;
+  padding: 1em 1em 0;
+}
+.cms md-card .md-card-header-home {
+  background: url('/assets/img/cms/cms-bg-home.jpg') no-repeat;
+}
+.cms md-card .section-header button {
+  margin: 0 0 0 1em;
+}
+.cms md-card md-card-content {
+  padding: 0;
+}
+.cms md-card md-card-content section {
+  padding: 16px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none !important;
+}
+.cms .intro-form {
+  width: 80%;
+  margin: 0 auto;
+}
+.cms .intro-card {
+  position: relative;
+  z-index: 3;
+  max-width: 360px;
+}
+.cms .intro-card section {
+  padding: 8px;
+}
+.cms textarea {
+  resize: none;
+}
+.cms .support .support-compose {
+  width: 100%;
+  height: 8em;
+}
+.cms .support .support-topics .icon {
+  position: relative;
+  top: 3px;
+  font-size: 2em;
+  margin-right: 0.5em;
+}
+.cms .nav-icon {
+  font-size: 2em;
+}
+.cms .sesh-logo {
+  height: 50px;
+}
+.cms md-toolbar {
+  min-height: 54px;
+}
+.cms md-toolbar .sesh-logo {
+  height: 34px;
+  margin-right: 0.4em;
+}
+.cms md-toolbar.logo {
+  padding-left: 1.05em;
+}
+.cms md-toolbar.logo span {
+  font-size: 28px;
+}
+.cms md-toolbar.header .menu {
+  min-width: 4rem;
+}
+.cms md-toolbar.header h2 {
+  padding: 0 1em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.cms md-toolbar.intro {
+  padding: 0.6em 1em;
+}
+.cms md-toolbar.intro .sesh-logo {
+  top: 4px;
+}
+.cms md-toolbar.intro h2 {
+  padding: 0 0 0 0.65em;
+}
+.cms md-input-container {
+  padding-bottom: 16px;
+}
+.cms md-sidenav {
+  z-index: 1000;
+  width: 230px;
+  min-width: 230px;
+  max-width: 230px;
+}
+.cms md-sidenav md-list {
+  padding: 0;
+}
+.cms md-sidenav md-list md-item {
+  display: block !important;
+  padding: 0;
+}
+.cms md-sidenav md-list .md-button {
+  color: inherit;
+  font-weight: 500;
+  text-align: left;
+  width: 100%;
+  margin: 0;
+  padding: 1em;
+}
+.cms md-sidenav md-list .md-button .icon {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  font-size: 2em;
+  width: 2em;
+  vertical-align: middle;
+}
+.cms md-sidenav md-list .md-button:hover {
+  background: #F5F5F5;
+}
+.cms md-sidenav md-list .md-button.selected {
+  background: #ececec;
+  color: #03a9f4;
+}
+.cms .nav-delimiter {
+  display: inline-block;
+  margin: 0 0.5em;
+  font-size: 80%;
+}
+.cms md-tooltip {
+  z-index: 5001;
+}
+.cms .card-collapse {
+  padding: 0 8px;
+}
+.cms .button-card-expand,
+.cms .button-card-collapse {
+  line-height: initial;
+  min-width: initial;
+}
+.md-dialog-container {
+  z-index: 10000;
+}
+.md-dialog-container md-dialog {
+  background: #fff;
+  padding: 16px;
+}
+.md-dialog-container md-dialog .dialog-content {
+  margin: 1em 0;
+}
+button.sn-progress {
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+button.sn-progress md-progress-circular {
+  margin: 0 auto;
+  -webkit-transform: scale(0.5) !important;
+  -moz-transform: scale(0.5) !important;
+  -o-transform: scale(0.5) !important;
+  -ms-transform: scale(0.5) !important;
+  transform: scale(0.5) !important;
+}

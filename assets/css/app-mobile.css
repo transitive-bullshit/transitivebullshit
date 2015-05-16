@@ -1,0 +1,36 @@
+/*! app-mobile.less */
+/*! elements.less
+ *
+ * Uses elements derived from LESS Elements 0.9 by Dmitry Fadeyev
+ * (http://lesselements.com)
+ *
+ * NOTE: the css version of this file is auto-generated, so only edit the original
+ * less version if you don't want your changes to be overwritten.
+ */
+.unselectable {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none !important;
+}
+.mobile-hidden {
+  display: none !important;
+}
+.mobile-only {
+  display: inherit;
+}
+.cms .cms-content {
+  padding: 0 !important;
+}
+.cms sn-cms-header md-card-content {
+  -webkit-transition: all 0s linear;
+  -moz-transition: all 0s linear;
+  -o-transition: all 0s linear;
+  transition: all 0s linear;
+}
+.cms md-toolbar.header h2 {
+  padding: 0 0.5em;
+}

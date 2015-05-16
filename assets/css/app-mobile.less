@@ -1,0 +1,29 @@
+/*! app-mobile.less */
+
+@import "lib/elements.less";
+
+.mobile-hidden {
+  display: none !important;
+}
+
+.mobile-only {
+  display: inherit;
+}
+
+.cms {
+  .cms-content {
+    padding: 0 !important;
+  }
+
+  sn-cms-header {
+    md-card-content {
+      .transition(all, 0s, linear);
+    }
+  }
+
+  md-toolbar.header {
+    h2 {
+      padding: 0 0.5em;
+    }
+  }
+}

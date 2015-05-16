@@ -1,0 +1,52 @@
+{
+  "name": "transitivebullshit",
+  "description": "Travis Fischer's personal portfolio site",
+  "dependencies": {
+    "async": "^0.9.0",
+    "body-parser": "^1.3.0",
+    "bower": "^1.3.4",
+    "compression": "^1.4.3",
+    "cookie-parser": "^1.3.3",
+    "dotenv": "^0.4.0",
+    "errorhandler": "^1.3.0",
+    "express": "^4.10.6",
+    "express-handlebars": "^1.1.0",
+    "express-restify-mongoose": "^0.7.5",
+    "express-session": "^1.10.0",
+    "gulp": "^3.6.2",
+    "gulp-csso": "^0.2.6",
+    "gulp-filter": "^0.4.1",
+    "gulp-flatten": "^0.0.2",
+    "gulp-inject": "^0.4.1",
+    "gulp-jscs": "^1.1.0",
+    "gulp-jshint": "^1.6.1",
+    "gulp-less": "*",
+    "gulp-load-plugins": "^0.5.3",
+    "gulp-minify-html": "^0.1.4",
+    "gulp-ng-annotate": "^0.3.6",
+    "gulp-ng-html2js": "^0.1.7",
+    "gulp-rimraf": "^0.1.1",
+    "gulp-size": "^0.3.1",
+    "gulp-uglify": "^0.2.1",
+    "gulp-useref": "^0.4.5",
+    "jshint-stylish": "^0.2.0",
+    "mobile-detect": "^0.4.3",
+    "mongoose": "3.8.12",
+    "morgan": "^1.5.0",
+    "prerender-node": "^1.2.0",
+    "request": "^2.51.0",
+    "slug": "^0.9.1"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/SeshApp/transitivebullshit.git"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "postinstall": "./node_modules/bower/bin/bower install && ./node_modules/gulp/bin/gulp.js default"
+  },
+  "main": "app.js"
+}

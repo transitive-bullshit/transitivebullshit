@@ -1,0 +1,19 @@
+/* **************************************************************************
+                                   ANIMATIONS
+   ************************************************************************** */
+
+@import "lib/elements.less";
+
+.flash-alert {
+  .transition(all, 0.3s, ease-out);
+
+  &.ng-enter, &.ng-leave.ng-leave-active {
+    opacity: 0.5;
+    .transform(translate(0, -100%));
+  }
+
+  &.ng-leave, &.ng-enter.ng-enter-active {
+    opacity: 1;
+    .transform(translate(0, 0));
+  }
+}
