@@ -1,14 +1,16 @@
-/* dancer.js - v0.3.2 - 2012-09-29
-* https://github.com/jsantell/dancer.js
-* Copyright (c) 2012 Jordan Santell; Licensed MIT */
-
+/*
+ * dancer - v0.4.0 - 2014-02-01
+ * https://github.com/jsantell/dancer.js
+ * Copyright (c) 2014 Jordan Santell
+ * Licensed MIT
+ */
 (function() {
 
   var Dancer = function () {
-    this.audioAdapter = Dancer._getAdapter(this);
+    this.audioAdapter = Dancer._getAdapter( this );
     this.events = {};
     this.sections = [];
-    this.bind('update', update);
+    this.bind( 'update', update );
   };
 
   Dancer.version = '0.3.2';
@@ -16,23 +18,23 @@
 
   Dancer.prototype = {
 
-    load : function (source) {
+    load : function ( source ) {
       var path;
 
       // Loading an Audio element
-      if (source instanceof HTMLElement) {
+      if ( source instanceof HTMLElement ) {
         this.source = source;
-        if (Dancer.isSupported() === 'flash') {
-          this.source = { src: Dancer._getMP3SrcFromAudio(source) };
+        if ( Dancer.isSupported() === 'flash' ) {
+          this.source = { src: Dancer._getMP3SrcFromAudio( source ) };
         }
 
       // Loading an object with src, [codecs]
       } else {
         this.source = window.Audio ? new Audio() : {};
-        this.source.src = Dancer._makeSupportedPath(source.src, source.codecs);
+        this.source.src = Dancer._makeSupportedPath( source.src, source.codecs );
       }
 
-      this.audio = this.audioAdapter.load(this.source);
+      this.audio = this.audioAdapter.load( this.source );
       return this;
     },
 
@@ -48,38 +50,38 @@
       return this;
     },
 
-    setVolume : function (volume) {
-      this.audioAdapter.setVolume(volume);
+    setVolume : function ( volume ) {
+      this.audioAdapter.setVolume( volume );
       return this;
     },
 
 
     /* Actions */
 
-    createKick : function (options) {
-      return new Dancer.Kick(this, options);
+    createKick : function ( options ) {
+      return new Dancer.Kick( this, options );
     },
 
-    bind : function (name, callback) {
-      if (!this.events[ name ]) {
+    bind : function ( name, callback ) {
+      if ( !this.events[ name ] ) {
         this.events[ name ] = [];
       }
-      this.events[ name ].push(callback);
+      this.events[ name ].push( callback );
       return this;
     },
 
-    unbind : function (name) {
-      if (this.events[ name ]) {
+    unbind : function ( name ) {
+      if ( this.events[ name ] ) {
         delete this.events[ name ];
       }
       return this;
     },
 
-    trigger : function (name) {
+    trigger : function ( name ) {
       var _this = this;
-      if (this.events[ name ]) {
-        this.events[ name ].forEach(function(callback) {
-          callback.call(_this);
+      if ( this.events[ name ] ) {
+        this.events[ name ].forEach(function( callback ) {
+          callback.call( _this );
         });
       }
       return this;
@@ -101,13 +103,13 @@
     },
 
     // Returns the magnitude of a frequency or average over a range of frequencies
-    getFrequency : function (freq, endFreq) {
+    getFrequency : function ( freq, endFreq ) {
       var sum = 0;
-      if (endFreq !== undefined) {
-        for (var i = freq; i <= endFreq; i++) {
+      if ( endFreq !== undefined ) {
+        for ( var i = freq; i <= endFreq; i++ ) {
           sum += this.getSpectrum()[ i ];
         }
-        return sum / (endFreq - freq + 1);
+        return sum / ( endFreq - freq + 1 );
       } else {
         return this.getSpectrum()[ freq ];
       }
@@ -132,7 +134,7 @@
 
     /* Sections */
 
-    after : function (time, callback) {
+    after : function ( time, callback ) {
       var _this = this;
       this.sections.push({
         condition : function () {
@@ -143,7 +145,7 @@
       return this;
     },
 
-    before : function (time, callback) {
+    before : function ( time, callback ) {
       var _this = this;
       this.sections.push({
         condition : function () {
@@ -154,7 +156,7 @@
       return this;
     },
 
-    between : function (startTime, endTime, callback) {
+    between : function ( startTime, endTime, callback ) {
       var _this = this;
       this.sections.push({
         condition : function () {
@@ -165,7 +167,7 @@
       return this;
     },
 
-    onceAt : function (time, callback) {
+    onceAt : function ( time, callback ) {
       var
         _this = this,
         thisSection = null;
@@ -174,7 +176,7 @@
           return _this.getTime() > time && !this.called;
         },
         callback : function () {
-          callback.call(this);
+          callback.call( this );
           thisSection.called = true;
         },
         called : false
@@ -186,16 +188,16 @@
   };
 
   function update () {
-    for (var i in this.sections) {
-      if (this.sections[ i ].condition())
-        this.sections[ i ].callback.call(this);
+    for ( var i in this.sections ) {
+      if ( this.sections[ i ].condition() )
+        this.sections[ i ].callback.call( this );
     }
   }
 
   window.Dancer = Dancer;
 })();
 
-(function (Dancer) {
+(function ( Dancer ) {
 
   var CODECS = {
     'mp3' : 'audio/mpeg;',
@@ -203,76 +205,76 @@
     'wav' : 'audio/wav; codecs="1"',
     'aac' : 'audio/mp4; codecs="mp4a.40.2"'
   },
-  audioEl = document.createElement('audio');
+  audioEl = document.createElement( 'audio' );
 
   Dancer.options = {};
 
-  Dancer.setOptions = function (o) {
-    for (var option in o) {
-      if (o.hasOwnProperty(option)) {
+  Dancer.setOptions = function ( o ) {
+    for ( var option in o ) {
+      if ( o.hasOwnProperty( option ) ) {
         Dancer.options[ option ] = o[ option ];
       }
     }
   };
 
   Dancer.isSupported = function () {
-    if (!window.Float32Array || !window.Uint32Array) {
+    if ( !window.Float32Array || !window.Uint32Array ) {
       return null;
-    } else if (!isUnsupportedSafari() && (window.AudioContext || window.webkitAudioContext)) {
+    } else if ( !isUnsupportedSafari() && ( window.AudioContext || window.webkitAudioContext )) {
       return 'webaudio';
-    } else if (audioEl && audioEl.mozSetup) {
+    } else if ( audioEl && audioEl.mozSetup ) {
       return 'audiodata';
-    } else if (FlashDetect.versionAtLeast(9)) {
+    } else if ( FlashDetect.versionAtLeast( 9 ) ) {
       return 'flash';
     } else {
       return '';
     }
   };
 
-  Dancer.canPlay = function (type) {
+  Dancer.canPlay = function ( type ) {
     var canPlay = audioEl.canPlayType;
     return !!(
       Dancer.isSupported() === 'flash' ?
         type.toLowerCase() === 'mp3' :
         audioEl.canPlayType &&
-        audioEl.canPlayType(CODECS[ type.toLowerCase() ]).replace(/no/, ''));
+        audioEl.canPlayType( CODECS[ type.toLowerCase() ] ).replace( /no/, ''));
   };
 
-  Dancer.addPlugin = function (name, fn) {
-    if (Dancer.prototype[ name ] === undefined) {
+  Dancer.addPlugin = function ( name, fn ) {
+    if ( Dancer.prototype[ name ] === undefined ) {
       Dancer.prototype[ name ] = fn;
     }
   };
 
-  Dancer._makeSupportedPath = function (source, codecs) {
-    if (!codecs) { return source; }
+  Dancer._makeSupportedPath = function ( source, codecs ) {
+    if ( !codecs ) { return source; }
 
-    for (var i = 0; i < codecs.length; i++) {
-      if (Dancer.canPlay(codecs[ i ])) {
+    for ( var i = 0; i < codecs.length; i++ ) {
+      if ( Dancer.canPlay( codecs[ i ] ) ) {
         return source + '.' + codecs[ i ];
       }
     }
     return source;
   };
 
-  Dancer._getAdapter = function (instance) {
-    switch (Dancer.isSupported()) {
+  Dancer._getAdapter = function ( instance ) {
+    switch ( Dancer.isSupported() ) {
       case 'webaudio':
-        return new Dancer.adapters.webkit(instance);
+        return new Dancer.adapters.webaudio( instance );
       case 'audiodata':
-        return new Dancer.adapters.moz(instance);
+        return new Dancer.adapters.moz( instance );
       case 'flash':
-        return new Dancer.adapters.flash(instance);
+        return new Dancer.adapters.flash( instance );
       default:
         return null;
     }
   };
 
-  Dancer._getMP3SrcFromAudio = function (audioEl) {
+  Dancer._getMP3SrcFromAudio = function ( audioEl ) {
     var sources = audioEl.children;
-    if (audioEl.src) { return audioEl.src; }
-    for (var i = sources.length; i--;) {
-      if ((sources[ i ].type || '').match(/audio\/mpeg/)) return sources[ i ].src;
+    if ( audioEl.src ) { return audioEl.src; }
+    for ( var i = sources.length; i--; ) {
+      if (( sources[ i ].type || '' ).match( /audio\/mpeg/ )) return sources[ i ].src;
     }
     return null;
   };
@@ -282,16 +284,16 @@
   // https://gist.github.com/3265344
   function isUnsupportedSafari () {
     var
-      isApple = !!(navigator.vendor || '').match(/Apple/),
-      version = navigator.userAgent.match(/Version\/([^ ]*)/);
-    version = version ? parseFloat(version[ 1 ]) : 0;
+      isApple = !!( navigator.vendor || '' ).match( /Apple/ ),
+      version = navigator.userAgent.match( /Version\/([^ ]*)/ );
+    version = version ? parseFloat( version[ 1 ] ) : 0;
     return isApple && version <= 6;
   }
 
-})(window.Dancer);
+})( window.Dancer );
 
-(function (undefined) {
-  var Kick = function (dancer, o) {
+(function ( undefined ) {
+  var Kick = function ( dancer, o ) {
     o = o || {};
     this.dancer    = dancer;
     this.frequency = o.frequency !== undefined ? o.frequency : [ 0, 10 ];
@@ -303,7 +305,7 @@
     this.currentThreshold = this.threshold;
 
     var _this = this;
-    this.dancer.bind('update', function () {
+    this.dancer.bind( 'update', function () {
       _this.onUpdate();
     });
   };
@@ -318,7 +320,7 @@
       return this;
     },
 
-    set : function (o) {
+    set : function ( o ) {
       o = o || {};
       this.frequency = o.frequency !== undefined ? o.frequency : this.frequency;
       this.threshold = o.threshold !== undefined ? o.threshold : this.threshold;
@@ -328,31 +330,31 @@
     },
 
     onUpdate : function () {
-      if (!this.isOn) { return; }
-      var magnitude = this.maxAmplitude(this.frequency);
-      if (magnitude >= this.currentThreshold &&
-          magnitude >= this.threshold) {
+      if ( !this.isOn ) { return; }
+      var magnitude = this.maxAmplitude( this.frequency );
+      if ( magnitude >= this.currentThreshold &&
+          magnitude >= this.threshold ) {
         this.currentThreshold = magnitude;
-        this.onKick && this.onKick.call(this.dancer, magnitude);
+        this.onKick && this.onKick.call( this.dancer, magnitude );
       } else {
-        this.offKick && this.offKick.call(this.dancer, magnitude);
+        this.offKick && this.offKick.call( this.dancer, magnitude );
         this.currentThreshold -= this.decay;
       }
     },
-    maxAmplitude : function (frequency) {
+    maxAmplitude : function ( frequency ) {
       var
         max = 0,
         fft = this.dancer.getSpectrum();
 
       // Sloppy array check
-      if (!frequency.length) {
+      if ( !frequency.length ) {
         return frequency < fft.length ?
           fft[ ~~frequency ] :
           null;
       }
 
-      for (var i = frequency[ 0 ], l = frequency[ 1 ]; i <= l; i++) {
-        if (fft[ i ] > max) { max = fft[ i ]; }
+      for ( var i = frequency[ 0 ], l = frequency[ 1 ]; i <= l; i++ ) {
+        if ( fft[ i ] > max ) { max = fft[ i ]; }
       }
       return max;
     }
@@ -366,7 +368,7 @@
     SAMPLE_SIZE = 2048,
     SAMPLE_RATE = 44100;
 
-  var adapter = function (dancer) {
+  var adapter = function ( dancer ) {
     this.dancer = dancer;
     this.audio = new Audio();
     this.context = window.AudioContext ?
@@ -376,33 +378,41 @@
 
   adapter.prototype = {
 
-    load : function (_source) {
+    load : function ( _source ) {
       var _this = this;
       this.audio = _source;
 
       this.isLoaded = false;
       this.progress = 0;
 
-      this.proc = this.context.createJavaScriptNode(SAMPLE_SIZE / 2, 1, 1);
-      this.proc.onaudioprocess = function (e) {
-        _this.update.call(_this, e);
+      if (!this.context.createScriptProcessor) {
+        this.context.createScriptProcessor = this.context.createJavascriptNode;
+      }
+      this.proc = this.context.createScriptProcessor( SAMPLE_SIZE / 2, 1, 1 );
+
+      this.proc.onaudioprocess = function ( e ) {
+        _this.update.call( _this, e );
       };
-      this.gain = this.context.createGainNode();
-
-      this.fft = new FFT(SAMPLE_SIZE / 2, SAMPLE_RATE);
-      this.signal = new Float32Array(SAMPLE_SIZE / 2);
-
-      if (this.audio.readyState < 3) {
-        this.audio.addEventListener('canplay', function () {
-          connectContext.call(_this);
-        });
-      } else {
-        connectContext.call(_this);
+      if (!this.context.createGain) {
+        this.context.createGain = this.context.createGainNode;
       }
 
-      this.audio.addEventListener('progress', function (e) {
-        if (e.currentTarget.duration) {
-          _this.progress = e.currentTarget.seekable.end(0) / e.currentTarget.duration;
+      this.gain = this.context.createGain();
+
+      this.fft = new FFT( SAMPLE_SIZE / 2, SAMPLE_RATE );
+      this.signal = new Float32Array( SAMPLE_SIZE / 2 );
+
+      if ( this.audio.readyState < 3 ) {
+        this.audio.addEventListener( 'canplay', function () {
+          connectContext.call( _this );
+        });
+      } else {
+        connectContext.call( _this );
+      }
+
+      this.audio.addEventListener( 'progress', function ( e ) {
+        if ( e.currentTarget.duration ) {
+          _this.progress = e.currentTarget.seekable.end( 0 ) / e.currentTarget.duration;
         }
       });
 
@@ -419,7 +429,7 @@
       this.isPlaying = false;
     },
 
-    setVolume : function (volume) {
+    setVolume : function ( volume ) {
       this.gain.gain.value = volume;
     },
 
@@ -443,79 +453,79 @@
       return this.audio.currentTime;
     },
 
-    update : function (e) {
-      if (!this.isPlaying || !this.isLoaded) return;
+    update : function ( e ) {
+      if ( !this.isPlaying || !this.isLoaded ) return;
 
       var
         buffers = [],
         channels = e.inputBuffer.numberOfChannels,
         resolution = SAMPLE_SIZE / channels,
-        sum = function (prev, curr) {
+        sum = function ( prev, curr ) {
           return prev[ i ] + curr[ i ];
         }, i;
 
-      for (i = channels; i--;) {
-        buffers.push(e.inputBuffer.getChannelData(i));
+      for ( i = channels; i--; ) {
+        buffers.push( e.inputBuffer.getChannelData( i ) );
       }
 
-      for (i = 0; i < resolution; i++) {
+      for ( i = 0; i < resolution; i++ ) {
         this.signal[ i ] = channels > 1 ?
-          buffers.reduce(sum) / channels :
+          buffers.reduce( sum ) / channels :
           buffers[ 0 ][ i ];
       }
 
-      this.fft.forward(this.signal);
-      this.dancer.trigger('update');
+      this.fft.forward( this.signal );
+      this.dancer.trigger( 'update' );
     }
   };
 
   function connectContext () {
-    this.source = this.context.createMediaElementSource(this.audio);
-    this.source.connect(this.proc);
-    this.source.connect(this.gain);
-    this.gain.connect(this.context.destination);
-    this.proc.connect(this.context.destination);
+    this.source = this.context.createMediaElementSource( this.audio );
+    this.source.connect( this.proc );
+    this.source.connect( this.gain );
+    this.gain.connect( this.context.destination );
+    this.proc.connect( this.context.destination );
 
     this.isLoaded = true;
     this.progress = 1;
-    this.dancer.trigger('loaded');
+    this.dancer.trigger( 'loaded' );
   }
 
-  Dancer.adapters.webkit = adapter;
+  Dancer.adapters.webaudio = adapter;
 
 })();
 
 (function() {
 
-  var adapter = function (dancer) {
+  var adapter = function ( dancer ) {
     this.dancer = dancer;
     this.audio = new Audio();
   };
 
   adapter.prototype = {
 
-    load : function (_source) {
+    load : function ( _source ) {
       var _this = this;
       this.audio = _source;
 
       this.isLoaded = false;
       this.progress = 0;
 
-      if (this.audio.readyState < 3) {
-        this.audio.addEventListener('loadedmetadata', function () {
-          getMetadata.call(_this);
+      if ( this.audio.readyState < 3 ) {
+        this.audio.addEventListener( 'loadedmetadata', function () {
+          getMetadata.call( _this );
         }, false);
       } else {
-        getMetadata.call(_this);
+        getMetadata.call( _this );
       }
 
-      this.audio.addEventListener('MozAudioAvailable', function (e) {
-        _this.update(e);
+      this.audio.addEventListener( 'MozAudioAvailable', function ( e ) {
+        _this.update( e );
       }, false);
 
-      this.audio.addEventListener('progress', function (e) {
-        if (e.currentTarget.duration) {
-          _this.progress = e.currentTarget.seekable.end(0) / e.currentTarget.duration;
+      this.audio.addEventListener( 'progress', function ( e ) {
+        if ( e.currentTarget.duration ) {
+          _this.progress = e.currentTarget.seekable.end( 0 ) / e.currentTarget.duration;
         }
       }, false);
 
@@ -532,7 +542,7 @@
       this.isPlaying = false;
     },
 
-    setVolume : function (volume) {
+    setVolume : function ( volume ) {
       this.audio.volume = volume;
     },
 
@@ -556,15 +566,15 @@
       return this.audio.currentTime;
     },
 
-    update : function (e) {
-      if (!this.isPlaying || !this.isLoaded) return;
+    update : function ( e ) {
+      if ( !this.isPlaying || !this.isLoaded ) return;
 
-      for (var i = 0, j = this.fbLength / 2; i < j; i++) {
-        this.signal[ i ] = (e.frameBuffer[ 2 * i ] + e.frameBuffer[ 2 * i + 1 ]) / 2;
+      for ( var i = 0, j = this.fbLength / 2; i < j; i++ ) {
+        this.signal[ i ] = ( e.frameBuffer[ 2 * i ] + e.frameBuffer[ 2 * i + 1 ] ) / 2;
       }
 
-      this.fft.forward(this.signal);
-      this.dancer.trigger('update');
+      this.fft.forward( this.signal );
+      this.dancer.trigger( 'update' );
     }
   };
 
@@ -572,11 +582,11 @@
     this.fbLength = this.audio.mozFrameBufferLength;
     this.channels = this.audio.mozChannels;
     this.rate     = this.audio.mozSampleRate;
-    this.fft      = new FFT(this.fbLength / this.channels, this.rate);
-    this.signal   = new Float32Array(this.fbLength / this.channels);
+    this.fft      = new FFT( this.fbLength / this.channels, this.rate );
+    this.signal   = new Float32Array( this.fbLength / this.channels );
     this.isLoaded = true;
     this.progress = 1;
-    this.dancer.trigger('loaded');
+    this.dancer.trigger( 'loaded' );
   }
 
   Dancer.adapters.moz = adapter;
@@ -591,7 +601,7 @@
     smLoading    = false,
     CONVERSION_COEFFICIENT = 0.93;
 
-  var adapter = function (dancer) {
+  var adapter = function ( dancer ) {
     this.dancer = dancer;
     this.wave_L = [];
     this.wave_R = [];
@@ -602,16 +612,16 @@
   adapter.prototype = {
     // `source` can be either an Audio element, if supported, or an object
     // either way, the path is stored in the `src` property
-    load : function (source) {
+    load : function ( source ) {
       var _this = this;
       this.path = source ? source.src : this.path;
 
       this.isLoaded = false;
       this.progress = 0;
 
-      !window.soundManager && !smLoading && loadSM.call(this);
+      !window.soundManager && !smLoading && loadSM.call( this );
 
-      if (window.soundManager) {
+      if ( window.soundManager ) {
         this.audio = soundManager.createSound({
           id       : 'dancer' + Math.random() + '',
           url      : this.path,
@@ -625,12 +635,12 @@
             _this.progress = this.bytesLoaded / this.bytesTotal;
           },
           onload   : function () {
-            _this.fft = new FFT(SAMPLE_SIZE, SAMPLE_RATE);
-            _this.signal = new Float32Array(SAMPLE_SIZE);
-            _this.waveform = new Float32Array(SAMPLE_SIZE);
+            _this.fft = new FFT( SAMPLE_SIZE, SAMPLE_RATE );
+            _this.signal = new Float32Array( SAMPLE_SIZE );
+            _this.waveform = new Float32Array( SAMPLE_SIZE );
             _this.isLoaded = true;
             _this.progress = 1;
-            _this.dancer.trigger('loaded');
+            _this.dancer.trigger( 'loaded' );
           }
         });
         this.dancer.audio = this.audio;
@@ -651,8 +661,8 @@
       this.isPlaying = false;
     },
 
-    setVolume : function (volume) {
-      this.audio.setVolume(volume * 100);
+    setVolume : function ( volume ) {
+      this.audio.setVolume( volume * 100 );
     },
 
     getVolume : function () {
@@ -676,11 +686,11 @@
     },
 
     update : function () {
-      if (!this.isPlaying && !this.isLoaded) return;
+      if ( !this.isPlaying && !this.isLoaded ) return;
       this.wave_L = this.audio.waveformData.left;
       this.wave_R = this.audio.waveformData.right;
       var avg;
-      for (var i = 0, j = this.wave_L.length; i < j; i++) {
+      for ( var i = 0, j = this.wave_L.length; i < j; i++ ) {
         avg = parseFloat(this.wave_L[ i ]) + parseFloat(this.wave_R[ i ]);
         this.waveform[ 2 * i ]     = avg / 2;
         this.waveform[ i * 2 + 1 ] = avg / 2;
@@ -688,15 +698,15 @@
         this.signal[ i * 2 + 1 ]   = avg * CONVERSION_COEFFICIENT;
       }
 
-      this.fft.forward(this.signal);
-      this.dancer.trigger('update');
+      this.fft.forward( this.signal );
+      this.dancer.trigger( 'update' );
     }
   };
 
   function loadSM () {
     var adapter = this;
     smLoading = true;
-    loadScript(Dancer.options.flashJS, function () {
+    loadScript( Dancer.options.flashJS, function () {
       soundManager = new SoundManager();
       soundManager.flashVersion = 9;
       soundManager.flash9Options.useWaveformData = true;
@@ -712,20 +722,20 @@
         adapter.load();
       });
       soundManager.ontimeout(function(){
-        console.error('Error loading SoundManager2.swf');
+        console.error( 'Error loading SoundManager2.swf' );
       });
       soundManager.beginDelayedInit();
     });
   }
 
-  function loadScript (url, callback) {
+  function loadScript ( url, callback ) {
     var
-      script   = document.createElement('script'),
-      appender = document.getElementsByTagName('script')[0];
+      script   = document.createElement( 'script' ),
+      appender = document.getElementsByTagName( 'script' )[0];
     script.type = 'text/javascript';
     script.src = url;
     script.onload = callback;
-    appender.parentNode.insertBefore(script, appender);
+    appender.parentNode.insertBefore( script, appender );
   }
 
   Dancer.adapters.flash = adapter;
