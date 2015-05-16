@@ -3,7 +3,7 @@
 import re
 import settings
 
-from django.conf.urls.defaults  import patterns, include, url
+from django.conf.urls import patterns, url, include
 from django.core.exceptions     import ImproperlyConfigured
 
 urlpatterns = patterns('',
