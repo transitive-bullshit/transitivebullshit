@@ -62,9 +62,7 @@ if (app.get('prod')) {
 
 app.use(require('prerender-node').set('prerenderServiceUrl', process.env.PRERENDER_SERVICE_URL))
 
-require('./routes/user')(app)
-require('./routes/product')(app)
-require('./routes/artist')(app)
+require('./routes/post')(app)
 require('./routes/views')(app)
 
 app.listen(app.get('port'), function () {

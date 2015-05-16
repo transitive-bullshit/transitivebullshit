@@ -1,4 +1,4 @@
-var Post = require('../models/product')
+var Post = require('../models/post')
 var restify = require('express-restify-mongoose')
 
 module.exports = function (app) {
