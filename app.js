@@ -14,7 +14,7 @@ var utils        = require('./lib/utils')
 var path         = require('path')
 var app          = express()
 
-var TOKEN_SECRET = process.env.TOKEN_SECRET || 'transitivebullshit-v1.0.0'
+var TOKEN_SECRET = process.env.TOKEN_SECRET || 'transitivebullshit-fisch-v1.0.0'
 
 mongoose.connect(process.env.MONGODB)
 
