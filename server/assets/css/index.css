@@ -1,0 +1,657 @@
+/*! styles.less
+ * 
+ * NOTE: the css version of this file is auto-generated, so only edit the original 
+ * less version if you don't want your changes to be overwritten.
+ * 
+ * Copyright (c) 2013 Travis Fischer
+ */
+/* **************************************************************************
+                                    IMPORTS
+   ************************************************************************** */
+/*! common.less
+ * 
+ * NOTE: the css version of this file is auto-generated, so only edit the original 
+ * less version if you don't want your changes to be overwritten.
+ * 
+ * Copyright (c) 2013 Travis Fischer
+ */
+/* **************************************************************************
+                                    IMPORTS
+   ************************************************************************** */
+/* elements.less
+ * 
+ * Uses elements derived from LESS Elements 0.6 by Dmitry Fadeyev 
+ * (http://lesselements.com)
+ * 
+ * NOTE: the css version of this file is auto-generated, so only edit the original 
+ * less version if you don't want your changes to be overwritten.
+ * 
+ * Copyright (c) 2013 Travis Fischer
+ */
+/* **************************************************************************
+                              STYLING CONSTANTS
+   ************************************************************************** */
+/* **************************************************************************
+                                   ARTICLES
+   ************************************************************************** */
+body {
+  min-width: 300px;
+  overflow-x: auto;
+  /*background: #efefef;*/
+  background: rgba(58, 42, 45, 0.3);
+}
+#content {
+  position: relative;
+  max-width: 1406px;
+  min-width: 300px;
+  margin: 24px auto;
+}
+#background-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: none;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  #background-canvas {
+    display: block;
+  }
+}
+article {
+  position: relative;
+  max-height: 480px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0 24px 24px 0;
+  padding: 12px;
+  float: left;
+  text-align: justify;
+  background: #fff;
+  border: 1px solid #999;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-box-shadow: 0 2px 25px 0 rgba(50, 50, 50, 0.25);
+  -moz-box-shadow: 0 2px 25px 0 rgba(50, 50, 50, 0.25);
+  -ms-box-shadow: 0 2px 25px 0 rgba(50, 50, 50, 0.25);
+  -o-box-shadow: 0 2px 25px 0 rgba(50, 50, 50, 0.25);
+  box-shadow: 0 2px 25px 0 rgba(50, 50, 50, 0.25);
+}
+article .title,
+article h1,
+article h2 {
+  text-align: left;
+  font: 1.8em 'Droid Sans', sans-serif;
+  color: #498FF2;
+}
+article h1 {
+  font-size: 1.5em;
+}
+article h2 {
+  font-size: 1.2em;
+}
+.single {
+  width: 300px;
+}
+.double {
+  width: 648px;
+}
+.full-height {
+  max-height: inherit;
+}
+.blur-img {
+  max-width: 200px;
+  margin: 0 auto;
+  display: block;
+}
+.keyword,
+.code-snippet,
+.css-class {
+  color: #ea932d;
+}
+.code-block {
+  font-size: 80% !important;
+  max-height: 30em;
+}
+.code-block-toggle {
+  display: none;
+}
+.code-block-active {
+  display: block;
+}
+.article-img-hero {
+  margin: 0 0 8px 16px;
+  display: block;
+  float: right;
+}
+.article-img-small,
+.article-img-hero {
+  max-width: 35%;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-box-shadow: 0 0 12px rgba(50, 50, 50, 0.25);
+  -moz-box-shadow: 0 0 12px rgba(50, 50, 50, 0.25);
+  -ms-box-shadow: 0 0 12px rgba(50, 50, 50, 0.25);
+  -o-box-shadow: 0 0 12px rgba(50, 50, 50, 0.25);
+  box-shadow: 0 0 12px rgba(50, 50, 50, 0.25);
+  -webkit-box-shadow: 0 0 12px rgba(50, 50, 50, 0.25) #000;
+  -moz-box-shadow: 0 0 12px rgba(50, 50, 50, 0.25) #000;
+  -ms-box-shadow: 0 0 12px rgba(50, 50, 50, 0.25) #000;
+  -o-box-shadow: 0 0 12px rgba(50, 50, 50, 0.25) #000;
+  box-shadow: 0 0 12px rgba(50, 50, 50, 0.25) #000;
+}
+.article-img-large {
+  max-width: 80%;
+}
+.article-img-small,
+.article-img-large {
+  display: block;
+  margin: 4px auto;
+}
+.no-frills {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-box-shadow: 0 0 0 #fff;
+  -moz-box-shadow: 0 0 0 #fff;
+  -ms-box-shadow: 0 0 0 #fff;
+  -o-box-shadow: 0 0 0 #fff;
+  box-shadow: 0 0 0 #fff;
+  -webkit-box-shadow: 0 0 0 #fff #000;
+  -moz-box-shadow: 0 0 0 #fff #000;
+  -ms-box-shadow: 0 0 0 #fff #000;
+  -o-box-shadow: 0 0 0 #fff #000;
+  box-shadow: 0 0 0 #fff #000;
+}
+.article-img-ticalc {
+  margin: 0 0 8px 16px;
+  display: block;
+  float: right;
+  width: 160px;
+  height: 100px;
+}
+.view-full-article {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2.5em;
+  line-height: 2.5em;
+  text-align: center;
+  background: rgba(58, 42, 45, 0.85);
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -ms-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+.view-full-article:hover {
+  height: 3em;
+  line-height: 3em;
+  font-weight: bold;
+}
+.overflowed {
+  overflow-y: hidden;
+}
+.overflowed .view-full-article {
+  display: block;
+}
+.fancybox-inner article {
+  max-height: auto;
+  width: auto;
+  margin: 0;
+  border: 0 none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-box-shadow: 0 0 0 0 rgba(50, 50, 50, 0.25);
+  -moz-box-shadow: 0 0 0 0 rgba(50, 50, 50, 0.25);
+  -ms-box-shadow: 0 0 0 0 rgba(50, 50, 50, 0.25);
+  -o-box-shadow: 0 0 0 0 rgba(50, 50, 50, 0.25);
+  box-shadow: 0 0 0 0 rgba(50, 50, 50, 0.25);
+}
+/* **************************************************************************
+                                 PROCESSING
+   ************************************************************************** */
+.clear {
+  clear: both;
+}
+.sketch p {
+  margin: 0;
+  padding: 0;
+}
+.sketch .desc,
+.sketch .attr {
+  margin-top: 0.5em;
+}
+.sketch .attr {
+  font-size: 90%;
+}
+.preview-sketch {
+  display: block;
+  width: 160px;
+  height: 110px;
+  margin: 1em auto 0.3em;
+  border: 1px solid rgba(50, 50, 50, 0.25);
+}
+#preview-sketch-displaced {
+  background: url(/assets/img/processing/displaced0.jpg) no-repeat;
+  background-size: 100% 100%;
+}
+#preview-sketch-gravity {
+  background: url(/assets/img/processing/gravity0.jpg) no-repeat;
+  background-size: 100% 100%;
+}
+#preview-sketch-hilbert {
+  background: url(/assets/img/processing/hilbert0.jpg) no-repeat;
+  background-size: 100% 100%;
+}
+#preview-sketch-intersection {
+  background: url(/assets/img/processing/intersection0.jpg) no-repeat;
+  background-size: 100% 100%;
+}
+#preview-sketch-intersection2 {
+  background: url(/assets/img/processing/intersection2.png) no-repeat;
+  background-size: 100% 100%;
+}
+#preview-sketch-not_found {
+  background: url(/assets/img/processing/not_found0.png) no-repeat;
+  background-size: 100% 100%;
+}
+#preview-sketch-primordial {
+  background: url(/assets/img/processing/primordial0.jpg) no-repeat;
+  background-size: 100% 100%;
+}
+#preview-sketch-rrt {
+  background: url(/assets/img/processing/rrt0.png) no-repeat;
+  background-size: 100% 100%;
+}
+#preview-sketch-substrate {
+  background: url(/assets/img/processing/substrate0.png) no-repeat;
+  background-size: 100% 100%;
+}
+#preview-sketch-tenebrous {
+  background: url(/assets/img/processing/tenebrous0.jpg) no-repeat;
+  background-size: 100% 100%;
+}
+#preview-sketch-thering {
+  background: url(/assets/img/processing/thering0.jpg) no-repeat;
+  background-size: 100% 100%;
+}
+#preview-sketch-trema {
+  background: url(/assets/img/processing/trema0.png) no-repeat;
+  background-size: 100% 100%;
+}
+#preview-sketch-trigrid {
+  background: url(/assets/img/processing/trigrid0.png) no-repeat;
+  background-size: 100% 100%;
+}
+/* **************************************************************************
+                           CRINKLED STATIC GOOGLE MAP
+   ************************************************************************** */
+.static-map-small {
+  /*.static-map(@size: 140px, @b: 2px, @angle: 35deg, @perspective: 200px)*/
+  position: relative;
+  display: block;
+  width: 140px;
+  top: -4px;
+  left: -4px;
+  padding: 4px;
+}
+.static-map-small .static-map-inner {
+  margin: 0 auto;
+  position: relative;
+  top: 0;
+  left: -2px;
+  display: block;
+  width: 140px;
+  height: 140px;
+  /*.perspective(@perspective);*/
+  /*.transform-style(preserve-3d);
+        .backface-visibility(hidden);*/
+}
+.static-map-small .static-map-inner .r0 {
+  background: url('https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&sensor=false&scale=1&format=png&maptype=roadmap&size=144x144&key=AIzaSyAEjlMEfxmlCBQeyw_82jjobQAFjYx-Las');
+  background-position: 0px;
+  position: absolute;
+  display: block;
+  width: 35px;
+  height: 140px;
+  top: 0;
+  border: 2px solid #fff;
+  -webkit-transition: -webkit-transform 0.1s linear;
+  -moz-transition: -moz-transform 0.1s linear;
+  -ms-transition: -ms-transform 0.1s linear;
+  -o-transition: -o-transform 0.1s linear;
+  transition: transform 0.1s linear;
+  left: 2px;
+  border-width: 2px 0 2px 2px;
+  -webkit-transform: perspective(200px) translate(12px, 0) rotateY(-35deg);
+  -moz-transform: perspective(200px) translate(12px, 0) rotateY(-35deg);
+  -o-transform: perspective(200px) translate(12px, 0) rotateY(-35deg);
+  -ms-transform: perspective(200px) translate(12px, 0) rotateY(-35deg);
+  transform: perspective(200px) translate(12px, 0) rotateY(-35deg);
+}
+.static-map-small .static-map-inner .r1 {
+  background: url('https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&sensor=false&scale=1&format=png&maptype=roadmap&size=144x144&key=AIzaSyAEjlMEfxmlCBQeyw_82jjobQAFjYx-Las');
+  background-position: -35px;
+  position: absolute;
+  display: block;
+  width: 35px;
+  height: 140px;
+  top: 0;
+  border: 2px solid #fff;
+  -webkit-transition: -webkit-transform 0.1s linear;
+  -moz-transition: -moz-transform 0.1s linear;
+  -ms-transition: -ms-transform 0.1s linear;
+  -o-transition: -o-transform 0.1s linear;
+  transition: transform 0.1s linear;
+  left: 39px;
+  border-width: 2px 0;
+  -webkit-transform: perspective(200px) translate(7px, 0) rotateY(35deg);
+  -moz-transform: perspective(200px) translate(7px, 0) rotateY(35deg);
+  -o-transform: perspective(200px) translate(7px, 0) rotateY(35deg);
+  -ms-transform: perspective(200px) translate(7px, 0) rotateY(35deg);
+  transform: perspective(200px) translate(7px, 0) rotateY(35deg);
+}
+.static-map-small .static-map-inner .r2 {
+  background: url('https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&sensor=false&scale=1&format=png&maptype=roadmap&size=144x144&key=AIzaSyAEjlMEfxmlCBQeyw_82jjobQAFjYx-Las');
+  background-position: -70px;
+  position: absolute;
+  display: block;
+  width: 35px;
+  height: 140px;
+  top: 0;
+  border: 2px solid #fff;
+  -webkit-transition: -webkit-transform 0.1s linear;
+  -moz-transition: -moz-transform 0.1s linear;
+  -ms-transition: -ms-transform 0.1s linear;
+  -o-transition: -o-transform 0.1s linear;
+  transition: transform 0.1s linear;
+  left: 74px;
+  border-width: 2px 0;
+  -webkit-transform: perspective(200px) translate(-1px, 0) rotateY(-35deg);
+  -moz-transform: perspective(200px) translate(-1px, 0) rotateY(-35deg);
+  -o-transform: perspective(200px) translate(-1px, 0) rotateY(-35deg);
+  -ms-transform: perspective(200px) translate(-1px, 0) rotateY(-35deg);
+  transform: perspective(200px) translate(-1px, 0) rotateY(-35deg);
+}
+.static-map-small .static-map-inner .r3 {
+  background: url('https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&sensor=false&scale=1&format=png&maptype=roadmap&size=144x144&key=AIzaSyAEjlMEfxmlCBQeyw_82jjobQAFjYx-Las');
+  background-position: -105px;
+  position: absolute;
+  display: block;
+  width: 35px;
+  height: 140px;
+  top: 0;
+  border: 2px solid #fff;
+  -webkit-transition: -webkit-transform 0.1s linear;
+  -moz-transition: -moz-transform 0.1s linear;
+  -ms-transition: -ms-transform 0.1s linear;
+  -o-transition: -o-transform 0.1s linear;
+  transition: transform 0.1s linear;
+  left: 109px;
+  border-width: 2px 2px 2px 0;
+  -webkit-transform: perspective(200px) translate(-6px, 0) rotateY(35deg);
+  -moz-transform: perspective(200px) translate(-6px, 0) rotateY(35deg);
+  -o-transform: perspective(200px) translate(-6px, 0) rotateY(35deg);
+  -ms-transform: perspective(200px) translate(-6px, 0) rotateY(35deg);
+  transform: perspective(200px) translate(-6px, 0) rotateY(35deg);
+}
+.static-map-small .static-map-inner .dark-layer {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #333;
+  opacity: 0.1;
+  -webkit-transition: opacity 0.1s ease-in-out;
+  -moz-transition: opacity 0.1s ease-in-out;
+  -ms-transition: opacity 0.1s ease-in-out;
+  -o-transition: opacity 0.1s ease-in-out;
+  transition: opacity 0.1s ease-in-out;
+}
+.static-map-small .static-map-inner .pin {
+  background: url(/assets/img/pin_shadow.png);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -7px auto auto 0;
+  display: block;
+  width: 24px;
+  height: 18px;
+  -webkit-transform: perspective(200px) translate(-2px, 0) scale(0.8, 0.8);
+  -moz-transform: perspective(200px) translate(-2px, 0) scale(0.8, 0.8);
+  -o-transform: perspective(200px) translate(-2px, 0) scale(0.8, 0.8);
+  -ms-transform: perspective(200px) translate(-2px, 0) scale(0.8, 0.8);
+  transform: perspective(200px) translate(-2px, 0) scale(0.8, 0.8);
+  -webkit-transition: -webkit-transform 0.1s linear;
+  -moz-transition: -moz-transform 0.1s linear;
+  -ms-transition: -ms-transform 0.1s linear;
+  -o-transition: -o-transform 0.1s linear;
+  transition: transform 0.1s linear;
+}
+.static-map-small .static-map-inner .pin:hover {
+  cursor: pointer;
+}
+.static-map-small .static-map-inner .pin .pin-inner {
+  background: url(/assets/img/pin.png);
+  position: relative;
+  top: -16px;
+  left: -8px;
+  display: block;
+  width: 26px;
+  height: 36px;
+}
+.static-map-small:hover .r0,
+.static-map-small:hover .r1,
+.static-map-small:hover .r2,
+.static-map-small:hover .r3,
+.static-map-small:hover .pin {
+  -webkit-transform: perspective(200px);
+  -moz-transform: perspective(200px);
+  -o-transform: perspective(200px);
+  -ms-transform: perspective(200px);
+  transform: perspective(200px);
+}
+.static-map-small:hover .dark-layer {
+  opacity: 0;
+}
+.zoom {
+  position: absolute;
+  z-index: 101;
+  top: 8px;
+  right: 8px;
+  display: block;
+  width: 25px;
+  height: 25px;
+  -webkit-transition: opacity 0.2s ease-out;
+  -moz-transition: opacity 0.2s ease-out;
+  -ms-transition: opacity 0.2s ease-out;
+  -o-transition: opacity 0.2s ease-out;
+  transition: opacity 0.2s ease-out;
+  background: url(/assets/img/entityimage_sprite.png) no-repeat;
+}
+.zoom:hover {
+  background-position: 0 -27px;
+  cursor: pointer;
+}
+.zoom-map {
+  background-position: -27px 0;
+}
+.zoom-map:hover {
+  background-position: -27px -27px;
+}
+article .static-map-small {
+  margin: 0 auto;
+}
+.screenshot {
+  position: relative;
+  display: block;
+  float: right;
+  margin: 12px;
+  width: 160px;
+  height: 100px;
+}
+.screenshot img {
+  position: absolute;
+}
+.screenshot .animated-screenshot {
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease-out;
+  -moz-transition: opacity 0.3s ease-out;
+  -ms-transition: opacity 0.3s ease-out;
+  -o-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
+}
+.screenshot:hover .animated-screenshot {
+  opacity: 1;
+}
+.link {
+  margin: 0.5em 1.5em 0 0.5em;
+  min-width: 8em;
+  float: left;
+}
+.link .ss-icon {
+  position: relative;
+  top: 0.25em;
+  font-size: 150%;
+  color: #333;
+  margin: 0 0.5em 0;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.link a:hover .ss-icon {
+  color: #67ADFF;
+}
+.link a:active .ss-icon {
+  color: #1066df;
+}
+#navigation {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  z-index: 1000;
+}
+#navigation .nav {
+  position: relative;
+  display: block;
+  color: #595959;
+  font-size: 2.5em;
+}
+#navigation .nav .icon {
+  display: block;
+  -webkit-transform: scale(0.75, 0.75);
+  -moz-transform: scale(0.75, 0.75);
+  -o-transform: scale(0.75, 0.75);
+  -ms-transform: scale(0.75, 0.75);
+  transform: scale(0.75, 0.75);
+  -webkit-transition: -webkit-transform 0.3s ease-out, color 0.3s ease-out;
+  -moz-transition: -moz-transform 0.3s ease-out, color 0.3s ease-out;
+  -ms-transition: -ms-transform 0.3s ease-out, color 0.3s ease-out;
+  -o-transition: -o-transform 0.3s ease-out, color 0.3s ease-out;
+  transition: transform 0.3s ease-out, color 0.3s ease-out;
+}
+#navigation .nav .desc {
+  position: absolute;
+  display: block;
+  top: 0.2em;
+  left: 0;
+  font-size: 0.8em;
+  opacity: 0;
+  -webkit-transform: translatex(0);
+  -moz-transform: translatex(0);
+  -o-transform: translatex(0);
+  -ms-transform: translatex(0);
+  transform: translatex(0);
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  /*@duration: 0.3s;
+            @ease: ease-out;
+            
+            -webkit-transition: -webkit-transform @duration @ease, color @duration1 @ease1;
+            -moz-transition:    -moz-transform    @duration @ease, color @duration1 @ease1;
+            -ms-transition:     -ms-transform     @duration @ease, color @duration1 @ease1;
+            -o-transition:      -o-transform      @duration @ease, color @duration1 @ease1;
+            transition:         transform         @duration @ease, @target1 @duration1 @ease1;*/
+}
+#navigation .nav:hover {
+  color: #67ADFF;
+}
+#navigation .nav:hover .icon {
+  -webkit-transform: scale(1, 1);
+  -moz-transform: scale(1, 1);
+  -o-transform: scale(1, 1);
+  -ms-transform: scale(1, 1);
+  transform: scale(1, 1);
+  -webkit-transition: -webkit-transform 0 ease-out, color 0 ease-out;
+  -moz-transition: -moz-transform 0 ease-out, color 0 ease-out;
+  -ms-transition: -ms-transform 0 ease-out, color 0 ease-out;
+  -o-transition: -o-transform 0 ease-out, color 0 ease-out;
+  transition: transform 0 ease-out, color 0 ease-out;
+}
+#navigation .nav:hover .desc {
+  opacity: 1;
+}
+#navigation .nav-all:hover .desc {
+  -webkit-transform: translatex(-42px);
+  -moz-transform: translatex(-42px);
+  -o-transform: translatex(-42px);
+  -ms-transform: translatex(-42px);
+  transform: translatex(-42px);
+}
+#navigation .nav-project:hover .desc {
+  -webkit-transform: translatex(-114px);
+  -moz-transform: translatex(-114px);
+  -o-transform: translatex(-114px);
+  -ms-transform: translatex(-114px);
+  transform: translatex(-114px);
+}
+#navigation .nav-article:hover .desc {
+  -webkit-transform: translatex(-103px);
+  -moz-transform: translatex(-103px);
+  -o-transform: translatex(-103px);
+  -ms-transform: translatex(-103px);
+  transform: translatex(-103px);
+}
+#navigation .nav-art:hover .desc {
+  -webkit-transform: translatex(-110px);
+  -moz-transform: translatex(-110px);
+  -o-transform: translatex(-110px);
+  -ms-transform: translatex(-110px);
+  transform: translatex(-110px);
+}
+#navigation .nav-about:hover .desc {
+  -webkit-transform: translatex(-86px);
+  -moz-transform: translatex(-86px);
+  -o-transform: translatex(-86px);
+  -ms-transform: translatex(-86px);
+  transform: translatex(-86px);
+}
