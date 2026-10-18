@@ -1,64 +1,66 @@
-#!/usr/bin/env python
+from django.http import Http404
+from django.template import TemplateDoesNotExist
+from django.template.loader import get_template
 
-from helpers import view, render_template
-import processing_test
+from .helpers import render_template, view
+from .processing_test import get_sketches
+
 
 @view()
 def index(request, *args, **kwargs):
-    params = {
-        'page'  : 'index', 
-        'title' : 'Transitive Bullshit', 
-        'PROCESSING_SKETCHES' : processing_test.get_sketches(), 
-    }
-    
-    return render_template(request, 'index.html', params)
+    return render_template(
+        request,
+        "index.html",
+        {
+            "page": "index",
+            "title": "Transitive Bullshit",
+            "PROCESSING_SKETCHES": get_sketches(),
+        },
+    )
 
-@view(ignore_extra_params=True)
+
+@view()
 def processing(request, *args, **kwargs):
-    sketches = processing_test.get_sketches()
-    sketch   = kwargs.get('sketch', None)
-    bare     = kwargs.get('bare', False)
-    params   = {}
-    
+    sketches = get_sketches()
+    sketch = kwargs.get("sketch")
+    params = {}
+
     if sketch is not None:
         sketch = sketch.lower()
-        
-        if len(filter(lambda x: x['name'] == sketch, sketches)) != 1:
+        if not any(s["name"] == sketch for s in sketches):
             sketch = None
-    
+
     if sketch is not None:
-        params['PROCESSING_SKETCH'] = sketch
+        params["PROCESSING_SKETCH"] = sketch
     else:
-        params['PROCESSING_SKETCHES'] = sketches
-    
-    params['page']  = 'processing'
-    params['title'] = 'Transitive Bullshit - Processing Lab'
-    params['bare']  = bare
-    
-    return render_template(request, 'processing.test.html', params)
+        params["PROCESSING_SKETCHES"] = sketches
+
+    params["page"] = "processing"
+    params["title"] = "Transitive Bullshit - Processing Lab"
+    params["bare"] = kwargs.get("bare", "").lower() in ("1", "true")
+
+    return render_template(request, "processing.test.html", params)
+
+
+def _render_named(request, name, context):
+    template = f"{name}.html"
+    try:
+        get_template(template)
+    except TemplateDoesNotExist as e:
+        raise Http404(template) from e
+    return render_template(request, template, context)
+
 
 @view()
 def test(request, *args, **kwargs):
-    default = 'turing'
-    experiment = kwargs.get('experiment', default)
-    if experiment is None:
-        experiment = default
-    
-    template = '%s.html' % experiment
-    
-    return render_template(request, template, {
-        'page'  : 'test', 
-        'title' : 'Transitive Bullshit - Lab - %s' % experiment, 
-    })
+    experiment = kwargs.get("experiment") or "turing"
+    return _render_named(
+        request,
+        experiment,
+        {"page": "test", "title": f"Transitive Bullshit - Lab - {experiment}"},
+    )
+
 
 @view()
 def article(request, *args, **kwargs):
-    ajax = bool(kwargs.get('ajax', 'False'))
-    article_id = kwargs.get('article', None)
-    
-    if ajax:
-        article_id = article_id.strip().lower()
-        template = '%s.html' % article_id
-        
-        return render_template(request, template, {})
-
+    return _render_named(request, kwargs["article"].strip().lower(), {})

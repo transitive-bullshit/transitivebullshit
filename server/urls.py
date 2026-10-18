@@ -1,60 +1,25 @@
-#!/usr/bin/env python
+from django.conf import settings
+from django.urls import re_path
+from django.views.static import serve
 
-import re
-import settings
+from core import views
 
-from django.conf.urls.defaults  import patterns, include, url
-from django.core.exceptions     import ImproperlyConfigured
+# Every page is also reachable under a legacy `mobile/` prefix.
+_pages = [
+    (r"(index(\.html?)?)?/?", views.index),
+    (r"processing/?", views.processing),
+    (r"test/?(?P<experiment>[\w-]{1,30})?", views.test),
+    (r"articles/(?P<article>[\w-]{1,30})\.html?/?", views.article),
+]
 
-urlpatterns = patterns('',
-    # ------------------------------ INDEX -------------------------------------
-    # ex.com
-    url(r'^index$',                             'core.views.index'), 
-    url(r'^index\.html?$',                      'core.views.index'), 
-    url(r'^/?$',                                'core.views.index'), 
-    
-    url(r'^mobile/index$',                      'core.views.index'), 
-    url(r'^mobile/index\.html?$',               'core.views.index'), 
-    url(r'^mobile/?$',                          'core.views.index'), 
-    
-    # ex.com/processing
-    url(r'^processing\/?$',                     'core.views.processing'), 
-    url(r'^mobile/processing\/?$',              'core.views.processing'), 
-    
-    # ex.com/test, ex.com/test/turing
-    url(r'^test\/?(?P<experiment>[\w-]{1,30})?$',        'core.views.test'), 
-    url(r'^mobile/test\/?(?P<experiment>[\w-]{1,30})?$', 'core.views.test'), 
-    
-    # ex.com/articles/about
-    url(r'^articles\/(?P<article>[\w-]{1,30})\.html?\/?$',  'core.views.article'), 
-    url(r'^mobile/articles\/(?P<article>[\w-]{1,30})\.html?\/?$',  'core.views.article'), 
-)
+urlpatterns = [
+    re_path(rf"^{prefix}{pattern}$", view)
+    for prefix in ("", "mobile/")
+    for pattern, view in _pages
+]
 
-def custom_static(prefix, view='django.views.static.serve', **kwargs):
-    """
-        Helper function to return a URL pattern for serving files.
-        
-        from django.conf import settings
-        from django.conf.urls.static import static
-        
-        urlpatterns = patterns('',
-            # ... the rest of your URLconf goes here ...
-        ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    """
-    
-    if prefix and '://' in prefix:
-        return []
-    elif not prefix:
-        raise ImproperlyConfigured("Empty static prefix not permitted")
-    else:
-        return patterns('', 
-            url(r'^%s(?P<path>.*)$' % re.escape(prefix.lstrip('/')), view, kwargs=kwargs), 
-        )
-
-# static assets
-urlpatterns += custom_static(settings.STATIC_URL, document_root=settings.STATIC_DOC_ROOT)
-
-# setup error handler views
-#handler404 = 'error.views.error_404'
-#handler500 = 'error.views.error_500'
-
+urlpatterns += [
+    re_path(
+        r"^assets/(?P<path>.*)$", serve, {"document_root": settings.STATIC_DOC_ROOT}
+    ),
+]
