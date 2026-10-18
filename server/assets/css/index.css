@@ -333,7 +333,7 @@ article h2 {
         .backface-visibility(hidden);*/
 }
 .static-map-small .static-map-inner .r0 {
-  background: url('https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&sensor=false&scale=1&format=png&maptype=roadmap&size=144x144&key=AIzaSyAEjlMEfxmlCBQeyw_82jjobQAFjYx-Las');
+  background: url('https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&sensor=false&scale=1&format=png&maptype=roadmap&size=144x144');
   background-position: 0px;
   position: absolute;
   display: block;
@@ -355,7 +355,7 @@ article h2 {
   transform: perspective(200px) translate(12px, 0) rotateY(-35deg);
 }
 .static-map-small .static-map-inner .r1 {
-  background: url('https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&sensor=false&scale=1&format=png&maptype=roadmap&size=144x144&key=AIzaSyAEjlMEfxmlCBQeyw_82jjobQAFjYx-Las');
+  background: url('https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&sensor=false&scale=1&format=png&maptype=roadmap&size=144x144');
   background-position: -35px;
   position: absolute;
   display: block;
@@ -377,7 +377,7 @@ article h2 {
   transform: perspective(200px) translate(7px, 0) rotateY(35deg);
 }
 .static-map-small .static-map-inner .r2 {
-  background: url('https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&sensor=false&scale=1&format=png&maptype=roadmap&size=144x144&key=AIzaSyAEjlMEfxmlCBQeyw_82jjobQAFjYx-Las');
+  background: url('https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&sensor=false&scale=1&format=png&maptype=roadmap&size=144x144');
   background-position: -70px;
   position: absolute;
   display: block;
@@ -399,7 +399,7 @@ article h2 {
   transform: perspective(200px) translate(-1px, 0) rotateY(-35deg);
 }
 .static-map-small .static-map-inner .r3 {
-  background: url('https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&sensor=false&scale=1&format=png&maptype=roadmap&size=144x144&key=AIzaSyAEjlMEfxmlCBQeyw_82jjobQAFjYx-Las');
+  background: url('https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&sensor=false&scale=1&format=png&maptype=roadmap&size=144x144');
   background-position: -105px;
   position: absolute;
   display: block;
